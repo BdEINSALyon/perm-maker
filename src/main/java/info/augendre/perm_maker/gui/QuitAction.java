@@ -1,4 +1,4 @@
-package info.augendre.perm_maker;
+package info.augendre.perm_maker.gui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

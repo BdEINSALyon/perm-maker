@@ -1,4 +1,4 @@
-package info.augendre.perm_maker;
+package info.augendre.perm_maker.gui;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -13,6 +13,7 @@ public class MainPanel {
     private JTable permTable;
     private JPanel mainPanel;
     private JButton availabilityButton;
+    private JButton planningButton;
     private JFrame mainFrame;
 
     public MainPanel(JFrame mainFrame) {
