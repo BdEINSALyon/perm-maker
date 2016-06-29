@@ -4,6 +4,7 @@ import info.augendre.perm_maker.utils.Utils;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.temporal.ChronoField;
 import java.util.Date;
 
 /**
@@ -34,7 +35,9 @@ public class Task {
 
     @Override
     public String toString() {
-        return label;
+        return label + " (" + day + " " +
+                startTime.get(ChronoField.HOUR_OF_DAY) + ":" + startTime.get(ChronoField.MINUTE_OF_HOUR) + " - " +
+                endTime.get(ChronoField.HOUR_OF_DAY) + ":" + endTime.get(ChronoField.MINUTE_OF_HOUR) + ")";
     }
 
     public String getLabel() {
