@@ -1,6 +1,7 @@
-package info.augendre.perm_maker.gui;
+package info.augendre.perm_maker;
 
 import info.augendre.perm_maker.actions.QuitAction;
+import info.augendre.perm_maker.gui.MainPanel;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
