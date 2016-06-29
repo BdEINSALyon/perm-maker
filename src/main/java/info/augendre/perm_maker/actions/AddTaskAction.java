@@ -22,6 +22,7 @@ public class AddTaskAction extends AbstractAction {
         Task task = new Task();
         TaskDialog dialog = new TaskDialog(task);
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
         System.out.println("TASK : " + task);
         planning.addTask(task);

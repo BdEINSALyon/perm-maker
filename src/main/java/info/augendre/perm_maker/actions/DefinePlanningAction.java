@@ -20,6 +20,7 @@ public class DefinePlanningAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         DefinePlanningDialog dialog = new DefinePlanningDialog(mainPanel.getPlanning());
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
 
     }
