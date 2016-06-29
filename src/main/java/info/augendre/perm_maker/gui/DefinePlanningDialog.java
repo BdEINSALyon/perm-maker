@@ -24,6 +24,7 @@ public class DefinePlanningDialog extends JDialog {
         this.planning = planning;
         $$$setupUI$$$();
         tasksList.setListData(planning.getTasks().toArray());
+        tasksList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
