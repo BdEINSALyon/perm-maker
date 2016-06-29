@@ -2,9 +2,12 @@ package info.augendre.perm_maker.gui;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import info.augendre.perm_maker.actions.DefinePlanningAction;
+import info.augendre.perm_maker.data.Planning;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ResourceBundle;
 
 /**
  * Created by gaugendre on 28/06/16
@@ -15,10 +18,13 @@ public class MainPanel {
     private JButton availabilityButton;
     private JButton planningButton;
     private JFrame mainFrame;
+    private Planning planning;
 
     public MainPanel(JFrame mainFrame) {
         this.mainFrame = mainFrame;
+        this.planning = new Planning();
         availabilityButton.addActionListener(actionEvent -> System.out.println("Hello"));
+        planningButton.addActionListener(new DefinePlanningAction(this));
     }
 
     public JFrame getMainFrame() {
@@ -31,6 +37,14 @@ public class MainPanel {
 
     public JPanel getMainPanel() {
         return mainPanel;
+    }
+
+    public Planning getPlanning() {
+        return planning;
+    }
+
+    public void setPlanning(Planning planning) {
+        this.planning = planning;
     }
 
     {
@@ -49,14 +63,44 @@ public class MainPanel {
      */
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
-        availabilityButton = new JButton();
-        availabilityButton.setText("Button");
-        mainPanel.add(availabilityButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         final JScrollPane scrollPane1 = new JScrollPane();
-        mainPanel.add(scrollPane1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        mainPanel.add(scrollPane1, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         permTable = new JTable();
         scrollPane1.setViewportView(permTable);
+        planningButton = new JButton();
+        this.$$$loadButtonText$$$(planningButton, ResourceBundle.getBundle("strings").getString("define_planning"));
+        mainPanel.add(planningButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        availabilityButton = new JButton();
+        this.$$$loadButtonText$$$(availabilityButton, ResourceBundle.getBundle("strings").getString("define_availability"));
+        mainPanel.add(availabilityButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private void $$$loadButtonText$$$(AbstractButton component, String text) {
+        StringBuffer result = new StringBuffer();
+        boolean haveMnemonic = false;
+        char mnemonic = '\0';
+        int mnemonicIndex = -1;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == '&') {
+                i++;
+                if (i == text.length()) break;
+                if (!haveMnemonic && text.charAt(i) != '&') {
+                    haveMnemonic = true;
+                    mnemonic = text.charAt(i);
+                    mnemonicIndex = result.length();
+                }
+            }
+            result.append(text.charAt(i));
+        }
+        component.setText(result.toString());
+        if (haveMnemonic) {
+            component.setMnemonic(mnemonic);
+            component.setDisplayedMnemonicIndex(mnemonicIndex);
+        }
     }
 
     /**
