@@ -22,6 +22,6 @@ public class DefinePlanningAction extends AbstractAction {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-
+        mainPanel.refreshPlanningDisplay();
     }
 }

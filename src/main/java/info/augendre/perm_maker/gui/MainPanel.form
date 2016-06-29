@@ -15,7 +15,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="fb1d8" class="javax.swing.JTable" binding="permTable">
+          <component id="fb1d8" class="javax.swing.JTable" binding="permTable" custom-create="true">
             <constraints/>
             <properties/>
           </component>
