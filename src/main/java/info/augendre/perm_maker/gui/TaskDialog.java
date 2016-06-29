@@ -51,12 +51,6 @@ public class TaskDialog extends JDialog {
 
     private void onOK() {
 // add your code here
-        System.out.println("Label : " + labelField.getText());
-        System.out.println("Day : " + dayComboBox.getSelectedItem());
-        System.out.println("Start time : " + startTimeSpinner.getValue());
-        System.out.println("End time : " + endTimeSpinner.getValue());
-        System.out.println("Num of resources : " + numberOfResourcesSpinner.getValue());
-
         task.setLabel(labelField.getText());
 
         task.setDays(new HashSet<>(dayList.getSelectedValuesList()));
@@ -68,12 +62,7 @@ public class TaskDialog extends JDialog {
         task.setEndTime(endDate);
 
         task.setNumberOfResources((Integer) numberOfResourcesSpinner.getValue());
-        
-        System.out.println(task.getLabel());
-        System.out.println(task.getDays());
-        System.out.println(task.getStartTime());
-        System.out.println(task.getEndTime());
-        System.out.println(task.getNumberOfResources());
+
         dispose();
     }
 
