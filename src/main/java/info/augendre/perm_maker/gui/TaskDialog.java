@@ -9,10 +9,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.*;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class TaskDialog extends JDialog {
     private JPanel contentPane;
@@ -23,6 +23,7 @@ public class TaskDialog extends JDialog {
     private JSpinner startTimeSpinner;
     private JSpinner endTimeSpinner;
     private JSpinner numberOfResourcesSpinner;
+    private JList<DayOfWeek> dayList;
     private Task task;
 
     public TaskDialog(Task task) {
@@ -55,15 +56,21 @@ public class TaskDialog extends JDialog {
         System.out.println("Start time : " + startTimeSpinner.getValue());
         System.out.println("End time : " + endTimeSpinner.getValue());
         System.out.println("Num of resources : " + numberOfResourcesSpinner.getValue());
+
         task.setLabel(labelField.getText());
-        task.setDay((DayOfWeek) dayComboBox.getSelectedItem());
+
+        task.setDays(new HashSet<>(dayList.getSelectedValuesList()));
+
         Date startDate = (Date) startTimeSpinner.getValue();
         task.setStartTime(startDate);
+
         Date endDate = (Date) endTimeSpinner.getValue();
         task.setEndTime(endDate);
+
         task.setNumberOfResources((Integer) numberOfResourcesSpinner.getValue());
+        
         System.out.println(task.getLabel());
-        System.out.println(task.getDay());
+        System.out.println(task.getDays());
         System.out.println(task.getStartTime());
         System.out.println(task.getEndTime());
         System.out.println(task.getNumberOfResources());
@@ -85,14 +92,18 @@ public class TaskDialog extends JDialog {
         endTimeSpinner.setEditor(timeEditor);
         endTimeSpinner.setValue(new Date());
         dayComboBox = new JComboBox<>();
+        dayList = new JList<>();
+        DayOfWeek[] days = {
+                DayOfWeek.MONDAY,
+                DayOfWeek.TUESDAY,
+                DayOfWeek.WEDNESDAY,
+                DayOfWeek.THURSDAY,
+                DayOfWeek.FRIDAY,
+                DayOfWeek.SATURDAY,
+                DayOfWeek.SUNDAY
+        };
 
-        dayComboBox.addItem(DayOfWeek.MONDAY);
-        dayComboBox.addItem(DayOfWeek.TUESDAY);
-        dayComboBox.addItem(DayOfWeek.WEDNESDAY);
-        dayComboBox.addItem(DayOfWeek.THURSDAY);
-        dayComboBox.addItem(DayOfWeek.FRIDAY);
-        dayComboBox.addItem(DayOfWeek.SATURDAY);
-        dayComboBox.addItem(DayOfWeek.SUNDAY);
+        dayList.setListData(days);
     }
 
     /**
@@ -140,13 +151,12 @@ public class TaskDialog extends JDialog {
         final JLabel label5 = new JLabel();
         this.$$$loadLabelText$$$(label5, ResourceBundle.getBundle("strings").getString("task-number"));
         panel3.add(label5, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        panel3.add(dayComboBox, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panel3.add(startTimeSpinner, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panel3.add(endTimeSpinner, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         numberOfResourcesSpinner = new JSpinner();
         panel3.add(numberOfResourcesSpinner, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel3.add(dayList, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         label1.setLabelFor(labelField);
-        label2.setLabelFor(dayComboBox);
         label3.setLabelFor(startTimeSpinner);
         label4.setLabelFor(endTimeSpinner);
         label5.setLabelFor(numberOfResourcesSpinner);

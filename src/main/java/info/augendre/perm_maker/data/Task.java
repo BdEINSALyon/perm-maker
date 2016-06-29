@@ -6,28 +6,30 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by gaugendre on 28/06/16
  */
 public class Task {
     private String label;
-    private DayOfWeek day;
+    private Set<DayOfWeek> days;
     private LocalTime startTime;
     private LocalTime endTime;
     private int numberOfResources;
 
     public Task() {
         this.label = "";
-        this.day = DayOfWeek.SUNDAY;
+        this.days = new HashSet<>();
         this.startTime = LocalTime.MIDNIGHT;
         this.endTime = LocalTime.MIDNIGHT;
         this.numberOfResources = 0;
     }
 
-    public Task(String label, DayOfWeek day, LocalTime startTime, LocalTime endTime, int numberOfResources) {
+    public Task(String label, Set<DayOfWeek> days, LocalTime startTime, LocalTime endTime, int numberOfResources) {
         this.label = label;
-        this.day = day;
+        this.days = days;
         this.startTime = startTime;
         this.endTime = endTime;
         this.numberOfResources = numberOfResources;
@@ -35,7 +37,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return label + " (" + day + " " +
+        return label + " (" + days + " " +
                 startTime.get(ChronoField.HOUR_OF_DAY) + ":" + startTime.get(ChronoField.MINUTE_OF_HOUR) + " - " +
                 endTime.get(ChronoField.HOUR_OF_DAY) + ":" + endTime.get(ChronoField.MINUTE_OF_HOUR) + ")";
     }
@@ -48,12 +50,16 @@ public class Task {
         this.label = label;
     }
 
-    public DayOfWeek getDay() {
-        return day;
+    public Set<DayOfWeek> getDays() {
+        return days;
     }
 
-    public void setDay(DayOfWeek day) {
-        this.day = day;
+    public void setDays(Set<DayOfWeek> days) {
+        this.days = days;
+    }
+
+    public void addDay(DayOfWeek day) {
+        this.days.add(day);
     }
 
     public LocalTime getStartTime() {

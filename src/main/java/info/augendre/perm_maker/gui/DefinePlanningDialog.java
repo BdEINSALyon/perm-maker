@@ -56,12 +56,18 @@ public class DefinePlanningDialog extends JDialog {
 
     public void addTask(Task task) {
         planning.addTask(task);
+        refreshTaskList();
+    }
+
+    private void refreshTaskList() {
         tasksList.setListData(planning.getTasks().toArray());
+        this.pack();
+        this.setLocationRelativeTo(null);
     }
 
     public void removeTask(Task task) {
-        planning.getTasks().remove(task);
-        tasksList.setListData(planning.getTasks().toArray());
+        planning.removeTask(task);
+        refreshTaskList();
     }
 
     private void createUIComponents() {
