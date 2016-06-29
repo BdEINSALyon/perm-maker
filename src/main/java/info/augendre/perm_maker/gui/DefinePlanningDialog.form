@@ -80,7 +80,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="4c462" class="javax.swing.JList" binding="tasksList">
+              <component id="4c462" class="javax.swing.JList" binding="tasksList" custom-create="true">
                 <constraints/>
                 <properties/>
               </component>
