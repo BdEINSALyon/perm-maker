@@ -1,7 +1,10 @@
 package info.augendre.perm_maker.data;
 
+import info.augendre.perm_maker.utils.Utils;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Date;
 
 /**
  * Created by gaugendre on 28/06/16
@@ -9,23 +12,23 @@ import java.time.LocalTime;
 public class Task {
     private String label;
     private DayOfWeek day;
-    private LocalTime time_start;
-    private LocalTime time_end;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private int numberOfResources;
 
     public Task() {
         this.label = "";
         this.day = DayOfWeek.SUNDAY;
-        this.time_start = LocalTime.MIDNIGHT;
-        this.time_end = LocalTime.MIDNIGHT;
+        this.startTime = LocalTime.MIDNIGHT;
+        this.endTime = LocalTime.MIDNIGHT;
         this.numberOfResources = 0;
     }
 
-    public Task(String label, DayOfWeek day, LocalTime time_start, LocalTime time_end, int numberOfResources) {
+    public Task(String label, DayOfWeek day, LocalTime startTime, LocalTime endTime, int numberOfResources) {
         this.label = label;
         this.day = day;
-        this.time_start = time_start;
-        this.time_end = time_end;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.numberOfResources = numberOfResources;
     }
 
@@ -50,20 +53,28 @@ public class Task {
         this.day = day;
     }
 
-    public LocalTime getTime_start() {
-        return time_start;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public void setTime_start(LocalTime time_start) {
-        this.time_start = time_start;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
-    public LocalTime getTime_end() {
-        return time_end;
+    public void setStartTime(Date date) {
+        this.startTime = Utils.localTimeFromDate(date);
     }
 
-    public void setTime_end(LocalTime time_end) {
-        this.time_end = time_end;
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setEndTime(Date date) {
+        this.endTime = Utils.localTimeFromDate(date);
     }
 
     public int getNumberOfResources() {

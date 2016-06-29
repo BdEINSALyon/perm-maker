@@ -23,4 +23,8 @@ public class Planning {
     public static Planning sortByDayTime(Planning p) {
         return p;
     }
+
+    public void addTask(Task task) {
+        this.tasks.add(task);
+    }
 }
