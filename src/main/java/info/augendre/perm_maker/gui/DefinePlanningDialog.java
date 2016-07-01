@@ -31,7 +31,6 @@ public class DefinePlanningDialog extends JDialog {
 
         buttonOK.addActionListener(e -> onOK());
 
-// call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -39,9 +38,10 @@ public class DefinePlanningDialog extends JDialog {
             }
         });
 
-// call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(e -> onOK(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
         addTaskButton.addActionListener(new AddTaskAction(this));
+
         removeTaskButton.addActionListener(actionEvent -> {
             if (!tasksList.isSelectionEmpty()) {
                 removeTask((Task) tasksList.getSelectedValue());
@@ -97,10 +97,10 @@ public class DefinePlanningDialog extends JDialog {
         buttonOK.setText("OK");
         panel2.add(buttonOK, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         addTaskButton = new JButton();
-        this.$$$loadButtonText$$$(addTaskButton, ResourceBundle.getBundle("strings").getString("add_task"));
+        this.$$$loadButtonText$$$(addTaskButton, ResourceBundle.getBundle("strings").getString("task-add"));
         panel1.add(addTaskButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         removeTaskButton = new JButton();
-        this.$$$loadButtonText$$$(removeTaskButton, ResourceBundle.getBundle("strings").getString("remove_task"));
+        this.$$$loadButtonText$$$(removeTaskButton, ResourceBundle.getBundle("strings").getString("task-remove"));
         panel1.add(removeTaskButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));

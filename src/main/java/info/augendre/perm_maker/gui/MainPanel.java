@@ -2,14 +2,17 @@ package info.augendre.perm_maker.gui;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import info.augendre.perm_maker.actions.DefineResourcesAction;
 import info.augendre.perm_maker.actions.DefinePlanningAction;
 import info.augendre.perm_maker.data.Planning;
+import info.augendre.perm_maker.data.Resource;
 import info.augendre.perm_maker.data.Task;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -26,12 +29,13 @@ public class MainPanel {
     private Planning planning;
     private DefaultTableModel permTableModel;
     private Vector<Object> permTableHeaders;
+    private ArrayList<Resource> resources;
 
     public MainPanel(JFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.planning = new Planning();
         $$$setupUI$$$();
-        availabilityButton.addActionListener(actionEvent -> System.out.println("Hello"));
+        availabilityButton.addActionListener(new DefineResourcesAction(this));
         planningButton.addActionListener(new DefinePlanningAction(this));
     }
 
@@ -142,5 +146,13 @@ public class MainPanel {
      */
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
+    }
+
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(ArrayList<Resource> resources) {
+        this.resources = resources;
     }
 }
