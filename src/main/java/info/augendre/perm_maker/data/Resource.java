@@ -16,4 +16,25 @@ public class Resource {
         this.name = name;
         this.availability = availability;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Planning getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Planning availability) {
+        this.availability = availability;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
