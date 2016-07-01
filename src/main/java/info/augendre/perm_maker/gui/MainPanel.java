@@ -7,9 +7,11 @@ import info.augendre.perm_maker.data.Planning;
 import info.augendre.perm_maker.data.Task;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.DayOfWeek;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 /**
  * Created by gaugendre on 28/06/16
@@ -22,6 +24,8 @@ public class MainPanel {
     private JButton assignTasksButton;
     private JFrame mainFrame;
     private Planning planning;
+    private DefaultTableModel permTableModel;
+    private Vector<Object> permTableHeaders;
 
     public MainPanel(JFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -49,23 +53,36 @@ public class MainPanel {
 
     public void setPlanning(Planning planning) {
         this.planning = planning;
+        refreshPlanningDisplay();
     }
 
     public void refreshPlanningDisplay() {
+        Vector<Vector<Object>> data = new Vector<>();
+        for (Task t : planning.getTasks()) {
+            Vector<Object> line = new Vector<>(permTable.getColumnCount());
+            line.add(t.toTableString());
+            for (int i = 1; i < 8; i++) {
+                DayOfWeek currentDay = DayOfWeek.of(i);
+                if (t.getDays().contains(currentDay)) {
+                    line.add("Missing : " + t.getNumberOfResources());
+                }
+                else {
+                    line.add("Not today");
+                }
+            }
+            data.add(line);
+        }
+        permTableModel.setDataVector(data, permTableHeaders);
     }
 
     private void createUIComponents() {
-        String[] columnNames = {
-                "Tasks",
-                DayOfWeek.MONDAY.toString(),
-                DayOfWeek.TUESDAY.toString(),
-                DayOfWeek.WEDNESDAY.toString(),
-                DayOfWeek.THURSDAY.toString(),
-                DayOfWeek.FRIDAY.toString(),
-                DayOfWeek.SATURDAY.toString(),
-                DayOfWeek.SUNDAY.toString(),
-        };
-        permTable = new JTable(new Object[][]{{"", "", "", "", "", "", "", ""}}, columnNames);
+        permTableHeaders = new Vector<>();
+        permTableHeaders.add("Tasks");
+        for (int i = 1; i < 8; i++) {
+            permTableHeaders.add(DayOfWeek.of(i));
+        }
+        permTable = new JTable(new PermTableModel(permTableHeaders, 0));
+        permTableModel = (DefaultTableModel) permTable.getModel();
     }
 
     /**

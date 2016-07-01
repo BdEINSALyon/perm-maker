@@ -42,6 +42,11 @@ public class Task {
                 endTime.get(ChronoField.HOUR_OF_DAY) + ":" + endTime.get(ChronoField.MINUTE_OF_HOUR) + ")";
     }
 
+    public String toTableString() {
+        return label + " (" + startTime.get(ChronoField.HOUR_OF_DAY) + ":" + startTime.get(ChronoField.MINUTE_OF_HOUR) + " - " +
+                endTime.get(ChronoField.HOUR_OF_DAY) + ":" + endTime.get(ChronoField.MINUTE_OF_HOUR) + ")";
+    }
+
     public String getLabel() {
         return label;
     }
