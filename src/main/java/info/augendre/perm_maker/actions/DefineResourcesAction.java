@@ -18,7 +18,7 @@ public class DefineResourcesAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DefineResourcesDialog dialog = new DefineResourcesDialog(mainPanel.getResources());
+        DefineResourcesDialog dialog = new DefineResourcesDialog(mainPanel);
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);

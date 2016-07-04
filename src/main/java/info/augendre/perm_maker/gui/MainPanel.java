@@ -2,8 +2,8 @@ package info.augendre.perm_maker.gui;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import info.augendre.perm_maker.actions.DefineResourcesAction;
 import info.augendre.perm_maker.actions.DefinePlanningAction;
+import info.augendre.perm_maker.actions.DefineResourcesAction;
 import info.augendre.perm_maker.data.Planning;
 import info.augendre.perm_maker.data.Resource;
 import info.augendre.perm_maker.data.Task;
@@ -34,6 +34,7 @@ public class MainPanel {
     public MainPanel(JFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.planning = new Planning();
+        this.resources = new ArrayList<>();
         $$$setupUI$$$();
         availabilityButton.addActionListener(new DefineResourcesAction(this));
         planningButton.addActionListener(new DefinePlanningAction(this));
@@ -69,8 +70,7 @@ public class MainPanel {
                 DayOfWeek currentDay = DayOfWeek.of(i);
                 if (t.getDays().contains(currentDay)) {
                     line.add("Missing : " + t.getNumberOfResources());
-                }
-                else {
+                } else {
                     line.add("Not today");
                 }
             }
@@ -87,6 +87,14 @@ public class MainPanel {
         }
         permTable = new JTable(new PermTableModel(permTableHeaders, 0));
         permTableModel = (DefaultTableModel) permTable.getModel();
+    }
+
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(ArrayList<Resource> resources) {
+        this.resources = resources;
     }
 
     /**
@@ -146,13 +154,5 @@ public class MainPanel {
      */
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
-    }
-
-    public ArrayList<Resource> getResources() {
-        return resources;
-    }
-
-    public void setResources(ArrayList<Resource> resources) {
-        this.resources = resources;
     }
 }

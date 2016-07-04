@@ -1,6 +1,8 @@
 package info.augendre.perm_maker.data;
 
 import info.augendre.perm_maker.utils.Utils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -97,5 +99,33 @@ public class Task {
 
     public void setNumberOfResources(int numberOfResources) {
         this.numberOfResources = numberOfResources;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        return new EqualsBuilder()
+                .append(numberOfResources, task.numberOfResources)
+                .append(label, task.label)
+                .append(days, task.days)
+                .append(startTime, task.startTime)
+                .append(endTime, task.endTime)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(label)
+                .append(days)
+                .append(startTime)
+                .append(endTime)
+                .append(numberOfResources)
+                .toHashCode();
     }
 }
