@@ -7,14 +7,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by gaugendre on 28/06/16
  */
 public class Task {
+    private Map<DayOfWeek, ArrayList<Resource>> assignedResources;
     private String label;
     private Set<DayOfWeek> days;
     private LocalTime startTime;
@@ -27,14 +26,16 @@ public class Task {
         this.startTime = LocalTime.MIDNIGHT;
         this.endTime = LocalTime.MIDNIGHT;
         this.numberOfResources = 0;
+        this.assignedResources = new HashMap<>();
     }
 
-    public Task(String label, Set<DayOfWeek> days, LocalTime startTime, LocalTime endTime, int numberOfResources) {
+    public Task(String label, Set<DayOfWeek> days, LocalTime startTime, LocalTime endTime, int numberOfResources, Map<DayOfWeek, ArrayList<Resource>> assignedResources) {
         this.label = label;
         this.days = days;
         this.startTime = startTime;
         this.endTime = endTime;
         this.numberOfResources = numberOfResources;
+        this.assignedResources = assignedResources;
     }
 
     @Override
@@ -99,6 +100,23 @@ public class Task {
 
     public void setNumberOfResources(int numberOfResources) {
         this.numberOfResources = numberOfResources;
+    }
+
+    public Map<DayOfWeek, ArrayList<Resource>> getAssignedResources() {
+        return assignedResources;
+    }
+
+    public void setAssignedResources(Map<DayOfWeek, ArrayList<Resource>> assignedResources) {
+        this.assignedResources = assignedResources;
+    }
+
+    public void addAssignedResource(Resource resource, DayOfWeek day) {
+        ArrayList<Resource> dayResources = this.assignedResources.get(day);
+        if (dayResources == null) {
+            dayResources = new ArrayList<>(this.numberOfResources);
+            this.assignedResources.put(day, dayResources);
+        }
+        dayResources.add(resource);
     }
 
     @Override

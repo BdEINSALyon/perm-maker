@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import info.augendre.perm_maker.actions.DefinePlanningAction;
 import info.augendre.perm_maker.actions.DefineResourcesAction;
+import info.augendre.perm_maker.actions.DispatchTasksAction;
 import info.augendre.perm_maker.data.Planning;
 import info.augendre.perm_maker.data.Resource;
 import info.augendre.perm_maker.data.Task;
@@ -12,9 +13,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Created by gaugendre on 28/06/16
@@ -38,6 +37,7 @@ public class MainPanel {
         $$$setupUI$$$();
         availabilityButton.addActionListener(new DefineResourcesAction(this));
         planningButton.addActionListener(new DefinePlanningAction(this));
+        assignTasksButton.addActionListener(new DispatchTasksAction(this));
     }
 
     public JFrame getMainFrame() {
@@ -64,17 +64,35 @@ public class MainPanel {
     public void refreshPlanningDisplay() {
         Vector<Vector<Object>> data = new Vector<>();
         for (Task t : planning.getTasks()) {
-            Vector<Object> line = new Vector<>(permTable.getColumnCount());
-            line.add(t.toTableString());
-            for (int i = 1; i < 8; i++) {
-                DayOfWeek currentDay = DayOfWeek.of(i);
-                if (t.getDays().contains(currentDay)) {
-                    line.add("Missing : " + t.getNumberOfResources());
-                } else {
-                    line.add("Not today");
+            for (int i = 0; i < t.getNumberOfResources(); i++) {
+                Vector<Object> line = new Vector<>(permTable.getColumnCount());
+                Set<Resource> assignedResources = new HashSet<>();
+                line.add(t.toTableString());
+
+                for (int j = 1; j < 8; j++) {
+                    DayOfWeek currentDay = DayOfWeek.of(j);
+                    if (t.getDays().contains(currentDay)) {
+                        ArrayList<Resource> candidates = t.getAssignedResources().get(currentDay);
+                        boolean assigned = false;
+                        if (candidates != null) {
+                            for (Resource r : candidates) {
+                                if (!assignedResources.contains(r)) {
+                                    assignedResources.add(r);
+                                    line.add(r.getName());
+                                    assigned = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!assigned) {
+                            line.add("MISSING");
+                        }
+                    } else {
+                        line.add("--");
+                    }
                 }
+                data.add(line);
             }
-            data.add(line);
         }
         permTableModel.setDataVector(data, permTableHeaders);
     }
