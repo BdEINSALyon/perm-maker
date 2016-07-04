@@ -7,19 +7,19 @@ import info.augendre.perm_maker.data.Task;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.time.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.time.DayOfWeek;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class TaskDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField labelField;
-    private JComboBox<DayOfWeek> dayComboBox;
     private JSpinner startTimeSpinner;
     private JSpinner endTimeSpinner;
     private JSpinner numberOfResourcesSpinner;
@@ -80,7 +80,6 @@ public class TaskDialog extends JDialog {
         timeEditor = new JSpinner.DateEditor(endTimeSpinner, "HH:mm");
         endTimeSpinner.setEditor(timeEditor);
         endTimeSpinner.setValue(new Date());
-        dayComboBox = new JComboBox<>();
         dayList = new JList<>();
         DayOfWeek[] days = {
                 DayOfWeek.MONDAY,

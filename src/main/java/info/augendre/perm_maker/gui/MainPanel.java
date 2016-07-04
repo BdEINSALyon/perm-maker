@@ -40,25 +40,12 @@ public class MainPanel {
         assignTasksButton.addActionListener(new DispatchTasksAction(this));
     }
 
-    public JFrame getMainFrame() {
-        return mainFrame;
-    }
-
-    public void setMainFrame(JFrame mainFrame) {
-        this.mainFrame = mainFrame;
-    }
-
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
     public Planning getPlanning() {
         return planning;
-    }
-
-    public void setPlanning(Planning planning) {
-        this.planning = planning;
-        refreshPlanningDisplay();
     }
 
     public void refreshPlanningDisplay() {
@@ -115,10 +102,6 @@ public class MainPanel {
 
     public ArrayList<Resource> getResources() {
         return resources;
-    }
-
-    public void setResources(ArrayList<Resource> resources) {
-        this.resources = resources;
     }
 
     /**

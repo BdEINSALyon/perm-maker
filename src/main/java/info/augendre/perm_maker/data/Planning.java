@@ -19,10 +19,6 @@ public class Planning {
         return tasks;
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
-
     public void resetTasks() {
         this.tasks = new ArrayList<>();
     }

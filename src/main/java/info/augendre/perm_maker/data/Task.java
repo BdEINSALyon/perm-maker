@@ -29,15 +29,6 @@ public class Task {
         this.assignedResources = new HashMap<>();
     }
 
-    public Task(String label, Set<DayOfWeek> days, LocalTime startTime, LocalTime endTime, int numberOfResources, Map<DayOfWeek, ArrayList<Resource>> assignedResources) {
-        this.label = label;
-        this.days = days;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.numberOfResources = numberOfResources;
-        this.assignedResources = assignedResources;
-    }
-
     public Task(String label, Set<DayOfWeek> days, LocalTime startTime, LocalTime endTime, int numberOfResources) {
         this.label = label;
         this.days = days;
@@ -57,10 +48,6 @@ public class Task {
     public String toTableString() {
         return label + " (" + startTime.get(ChronoField.HOUR_OF_DAY) + ":" + startTime.get(ChronoField.MINUTE_OF_HOUR) + " - " +
                 endTime.get(ChronoField.HOUR_OF_DAY) + ":" + endTime.get(ChronoField.MINUTE_OF_HOUR) + ")";
-    }
-
-    public String getLabel() {
-        return label;
     }
 
     public void setLabel(String label) {
@@ -113,10 +100,6 @@ public class Task {
 
     public Map<DayOfWeek, ArrayList<Resource>> getAssignedResources() {
         return assignedResources;
-    }
-
-    public void setAssignedResources(Map<DayOfWeek, ArrayList<Resource>> assignedResources) {
-        this.assignedResources = assignedResources;
     }
 
     public void addAssignedResource(Resource resource, DayOfWeek day) {

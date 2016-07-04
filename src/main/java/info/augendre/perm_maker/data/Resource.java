@@ -17,11 +17,6 @@ public class Resource {
         this.availability = new Planning();
     }
 
-    public Resource(String name, Planning availability) {
-        this.name = name;
-        this.availability = availability;
-    }
-
     public String getName() {
         return name;
     }
@@ -32,10 +27,6 @@ public class Resource {
 
     public Planning getAvailability() {
         return availability;
-    }
-
-    public void setAvailability(Planning availability) {
-        this.availability = availability;
     }
 
     @Override
