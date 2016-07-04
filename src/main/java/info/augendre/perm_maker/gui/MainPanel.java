@@ -64,9 +64,9 @@ public class MainPanel {
     public void refreshPlanningDisplay() {
         Vector<Vector<Object>> data = new Vector<>();
         for (Task t : planning.getTasks()) {
+            Map<DayOfWeek, Set<Resource>> displayedResources = new TreeMap<>();
             for (int i = 0; i < t.getNumberOfResources(); i++) {
                 Vector<Object> line = new Vector<>(permTable.getColumnCount());
-                Set<Resource> assignedResources = new HashSet<>();
                 line.add(t.toTableString());
 
                 for (int j = 1; j < 8; j++) {
@@ -76,8 +76,13 @@ public class MainPanel {
                         boolean assigned = false;
                         if (candidates != null) {
                             for (Resource r : candidates) {
-                                if (!assignedResources.contains(r)) {
-                                    assignedResources.add(r);
+                                Set<Resource> resources = displayedResources.get(currentDay);
+                                if (resources == null) {
+                                    resources = new HashSet<>();
+                                    displayedResources.put(currentDay, resources);
+                                }
+                                if (!resources.contains(r)) {
+                                    resources.add(r);
                                     line.add(r.getName());
                                     assigned = true;
                                     break;
