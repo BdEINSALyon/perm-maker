@@ -37,10 +37,10 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>info.augendre.name_picker.Main</mainClass>
+                                    <mainClass>info.augendre.perm_maker.Main</mainClass>
                                 </manifest>
                             </archive>
-                            <finalName>name-picker</finalName>
+                            <finalName>perm-maker</finalName>
                         </configuration>
                         <phase>package</phase>
                         <goals>
