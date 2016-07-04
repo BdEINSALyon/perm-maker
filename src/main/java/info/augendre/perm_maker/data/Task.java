@@ -119,6 +119,10 @@ public class Task {
         dayResources.add(resource);
     }
 
+    public void clearAssignments() {
+        this.assignedResources.clear();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
