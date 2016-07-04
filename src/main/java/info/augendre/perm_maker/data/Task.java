@@ -38,6 +38,15 @@ public class Task {
         this.assignedResources = assignedResources;
     }
 
+    public Task(String label, Set<DayOfWeek> days, LocalTime startTime, LocalTime endTime, int numberOfResources) {
+        this.label = label;
+        this.days = days;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.numberOfResources = numberOfResources;
+        this.assignedResources = new HashMap<>();
+    }
+
     @Override
     public String toString() {
         return label + " (" + days + " " +

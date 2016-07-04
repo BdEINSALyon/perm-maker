@@ -12,7 +12,11 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class DefinePlanningDialog extends JDialog {
     private JPanel contentPane;
@@ -20,6 +24,7 @@ public class DefinePlanningDialog extends JDialog {
     private JButton addTaskButton;
     private JButton removeTaskButton;
     private JList<Object> tasksList;
+    private JButton button1;
     private Planning planning;
 
     public DefinePlanningDialog(Planning planning) {
@@ -49,6 +54,48 @@ public class DefinePlanningDialog extends JDialog {
                 removeTask((Task) tasksList.getSelectedValue());
             }
         });
+        button1.addActionListener(e -> {
+            planning.resetTasks();
+            Set<DayOfWeek> weekDays = new HashSet<>();
+            weekDays.add(DayOfWeek.MONDAY);
+            weekDays.add(DayOfWeek.TUESDAY);
+            weekDays.add(DayOfWeek.WEDNESDAY);
+            weekDays.add(DayOfWeek.THURSDAY);
+            weekDays.add(DayOfWeek.FRIDAY);
+
+            LocalTime startTime = LocalTime.of(12, 0);
+            LocalTime endTime = LocalTime.of(13, 0);
+            planning.addTask(new Task("Accueil", new HashSet<>(weekDays), startTime, endTime, 2));
+            planning.addTask(new Task("COOP", new HashSet<>(weekDays), startTime, endTime, 1));
+
+            startTime = LocalTime.of(13, 0);
+            endTime = LocalTime.of(14, 0);
+            planning.addTask(new Task("Accueil", new HashSet<>(weekDays), startTime, endTime, 1));
+            planning.addTask(new Task("COOP", new HashSet<>(weekDays), startTime, endTime, 1));
+
+            weekDays.clear();
+            weekDays.add(DayOfWeek.MONDAY);
+            weekDays.add(DayOfWeek.TUESDAY);
+            weekDays.add(DayOfWeek.WEDNESDAY);
+
+            startTime = LocalTime.of(18, 0);
+            endTime = LocalTime.of(19, 0);
+            planning.addTask(new Task("Accueil", new HashSet<>(weekDays), startTime, endTime, 1));
+            planning.addTask(new Task("COOP", new HashSet<>(weekDays), startTime, endTime, 1));
+
+            weekDays.clear();
+            weekDays.add(DayOfWeek.THURSDAY);
+
+            startTime = LocalTime.of(14, 0);
+            endTime = LocalTime.of(15, 0);
+            planning.addTask(new Task("COOP", new HashSet<>(weekDays), startTime, endTime, 1));
+
+            startTime = LocalTime.of(15, 0);
+            endTime = LocalTime.of(16, 0);
+            planning.addTask(new Task("COOP", new HashSet<>(weekDays), startTime, endTime, 1));
+
+            refreshTaskList();
+        });
     }
 
     private void onOK() {
@@ -63,8 +110,6 @@ public class DefinePlanningDialog extends JDialog {
 
     private void refreshTaskList() {
         tasksList.setListData(planning.getTasks().toArray());
-        this.pack();
-        this.setLocationRelativeTo(null);
     }
 
     public void removeTask(Task task) {
@@ -99,7 +144,7 @@ public class DefinePlanningDialog extends JDialog {
         buttonOK.setText("OK");
         panel2.add(buttonOK, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel3 = new JPanel();
-        panel3.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panel3.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
         panel1.add(panel3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(136, 38), null, 0, false));
         addTaskButton = new JButton();
         this.$$$loadButtonText$$$(addTaskButton, ResourceBundle.getBundle("strings").getString("task-add"));
@@ -107,6 +152,9 @@ public class DefinePlanningDialog extends JDialog {
         removeTaskButton = new JButton();
         this.$$$loadButtonText$$$(removeTaskButton, ResourceBundle.getBundle("strings").getString("task-remove"));
         panel3.add(removeTaskButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        button1 = new JButton();
+        this.$$$loadButtonText$$$(button1, ResourceBundle.getBundle("strings").getString("planning-default"));
+        panel3.add(button1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel4 = new JPanel();
         panel4.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         contentPane.add(panel4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));

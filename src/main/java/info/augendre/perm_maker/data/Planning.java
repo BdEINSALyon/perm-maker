@@ -23,6 +23,10 @@ public class Planning {
         this.tasks = tasks;
     }
 
+    public void resetTasks() {
+        this.tasks = new ArrayList<>();
+    }
+
     public static Planning sortByDayTime(Planning p) {
         return p;
     }
