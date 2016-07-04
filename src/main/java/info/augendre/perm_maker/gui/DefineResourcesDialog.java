@@ -51,8 +51,6 @@ public class DefineResourcesDialog extends JDialog {
 
     private void refreshResourcesList() {
         resourcesList.setListData(mainPanel.getResources().toArray());
-        this.pack();
-        this.setLocationRelativeTo(null);
     }
 
     public void addResource(Resource r) {
