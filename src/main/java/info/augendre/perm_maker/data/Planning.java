@@ -40,10 +40,7 @@ public class Planning {
     }
 
     public boolean isResourceAvailableForTask(Resource resource, Task task, DayOfWeek day) {
-//        System.out.println("=============================");
-//        System.out.println(day + " (" + task.getStartTime() + " - " + task.getEndTime() + ")\n");
         if (!resource.isAvailableAt(task, day)) {
-//            System.out.println(resource.getName() + " not available this time...");
             return false;
         }
         int countAssigments = 0;
@@ -55,9 +52,6 @@ public class Planning {
                 }
             }
         }
-
-//        System.out.println(resource.getName() + " assigned " + countAssigments + " times => " + (countAssigments < 2));
-//        System.out.println(resource.getName() + " already assigned today : " + getResourcesForDay(day).contains(resource));
 
         return countAssigments < 2 && !getResourcesForDay(day).contains(resource);
     }

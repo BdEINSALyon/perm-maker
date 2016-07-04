@@ -37,7 +37,6 @@ public class DispatchTasksAction extends AbstractAction {
                     }
                 }
             }
-            System.out.println(t.getAssignedResources());
         }
         mainPanel.refreshPlanningDisplay();
     }

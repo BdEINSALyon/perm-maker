@@ -1,6 +1,5 @@
 package info.augendre.perm_maker.actions;
 
-import info.augendre.perm_maker.data.Planning;
 import info.augendre.perm_maker.data.Task;
 import info.augendre.perm_maker.gui.DefinePlanningDialog;
 import info.augendre.perm_maker.gui.TaskDialog;
@@ -25,7 +24,6 @@ public class AddTaskAction extends AbstractAction {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-        System.out.println("TASK : " + task);
         definePlanningDialog.addTask(task);
     }
 }
