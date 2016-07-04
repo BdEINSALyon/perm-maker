@@ -35,6 +35,9 @@ public class ResourceDialog extends JDialog {
 
     private void onOK() {
         resource.setName(nameField.getText());
+        for (Object o : availabilitiesList.getSelectedValuesList()) {
+            resource.getAvailability().addTask((Task) o);
+        }
         dispose();
     }
 

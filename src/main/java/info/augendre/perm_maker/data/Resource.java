@@ -35,6 +35,6 @@ public class Resource {
 
     @Override
     public String toString() {
-        return this.name;
+        return this.name + " : " + this.availability.getTasks();
     }
 }
