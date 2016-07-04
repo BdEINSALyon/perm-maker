@@ -24,6 +24,7 @@ public class DefineResourcesDialog extends JDialog {
     public DefineResourcesDialog(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         $$$setupUI$$$();
+        this.refreshResourcesList();
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
