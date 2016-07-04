@@ -11,7 +11,6 @@ import info.augendre.perm_maker.data.Task;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.time.DayOfWeek;
 import java.util.*;
@@ -109,22 +108,7 @@ public class MainPanel {
         for (int i = 1; i < 8; i++) {
             permTableHeaders.add(DayOfWeek.of(i));
         }
-        permTable = new JTable(new PermTableModel(permTableHeaders, 0)) {
-            @Override
-            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
-                Component comp = super.prepareRenderer(renderer, row, column);
-                String value = (String) getModel().getValueAt(row, column);
-                if (value.equals("MISSING")) {
-                    comp.setBackground(Color.RED);
-                } else if (value.equals("--")) {
-                    comp.setBackground(Color.LIGHT_GRAY);
-                } else if (column == 0) {
-                    comp.setBackground(Color.WHITE);
-                } else {
-                    comp.setBackground(Color.GREEN);
-                }
-                return comp;
-            }
+        permTable = new PermTable(new PermTableModel(permTableHeaders, 0)) {
         };
         permTableModel = (DefaultTableModel) permTable.getModel();
     }
