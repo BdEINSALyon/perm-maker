@@ -22,18 +22,17 @@ public class Main implements Runnable {
     }
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace(System.err);
+        }
+
         SwingUtilities.invokeLater(new Main());
     }
 
     @Override
     public void run() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace(System.err);
-        }
-
         // Add key binding
         mainPanel.getInputMap(AFC).put(escapeStroke, CLOSE);
         mainPanel.getActionMap().put(CLOSE, new QuitAction(mainFrame));
