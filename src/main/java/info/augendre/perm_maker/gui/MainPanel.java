@@ -121,10 +121,10 @@ public class MainPanel {
         panel1.add(scrollPane1, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         scrollPane1.setViewportView(permTable);
         planningButton = new JButton();
-        this.$$$loadButtonText$$$(planningButton, ResourceBundle.getBundle("strings").getString("define_planning"));
+        this.$$$loadButtonText$$$(planningButton, ResourceBundle.getBundle("strings").getString("planning-define"));
         panel1.add(planningButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         availabilityButton = new JButton();
-        this.$$$loadButtonText$$$(availabilityButton, ResourceBundle.getBundle("strings").getString("define_availability"));
+        this.$$$loadButtonText$$$(availabilityButton, ResourceBundle.getBundle("strings").getString("resource-define"));
         panel1.add(availabilityButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         assignTasksButton = new JButton();
         this.$$$loadButtonText$$$(assignTasksButton, ResourceBundle.getBundle("strings").getString("assign"));
