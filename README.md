@@ -1,6 +1,9 @@
 # Perm Maker
 Small Java app to help us organize our duty periods.
 
+## WARNING
+This application DOES NOT SAVE anything. It will may be added in a future version.
+
 ## How to use ?
 ### Launch
 #### Linux and OS X
