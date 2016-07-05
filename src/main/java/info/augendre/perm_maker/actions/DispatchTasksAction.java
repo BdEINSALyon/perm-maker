@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 /**
  * Created by gaugendre on 04/07/16
@@ -25,19 +26,38 @@ public class DispatchTasksAction extends AbstractAction {
     public void actionPerformed(ActionEvent actionEvent) {
         Planning planning = this.mainPanel.getPlanning();
         planning.clearAssignments();
+
         for (Task t : planning.getTasks()) {
             for (DayOfWeek d : t.getDays()) {
-                int countAssigned = 0;
-                ArrayList<Resource> resources = new ArrayList<>(mainPanel.getResources());
-                Collections.shuffle(resources);
-                for (Resource r : resources) {
-                    if (countAssigned < t.getNumberOfResources() && planning.isResourceAvailableForTask(r, t, d)) {
+                ArrayList<Resource> allResources = new ArrayList<>(mainPanel.getResources());
+                ArrayList<Resource> notMuchAvailableResources = allResources.stream().filter(r -> r.getNumberOfAvailabilities() <= 4).collect(Collectors.toCollection(ArrayList::new));
+                notMuchAvailableResources.sort((o1, o2) -> o1.getNumberOfAvailabilities() - o2.getNumberOfAvailabilities());
+
+                int numberOfResourcesAssignedToTask = 0;
+                boolean assigned = false;
+                for (Resource r : notMuchAvailableResources) {
+                    if (canBeAssigned(r, t, d, planning, numberOfResourcesAssignedToTask)) {
                         t.addAssignedResource(r, d);
-                        countAssigned++;
+                        numberOfResourcesAssignedToTask++;
+                        assigned = true;
+                    }
+                }
+                if (!assigned) {
+                    notMuchAvailableResources.forEach(allResources::remove);
+                    Collections.shuffle(allResources);
+                    for (Resource r : allResources) {
+                        if (canBeAssigned(r, t, d, planning, numberOfResourcesAssignedToTask)) {
+                            t.addAssignedResource(r, d);
+                            numberOfResourcesAssignedToTask++;
+                        }
                     }
                 }
             }
         }
         mainPanel.refreshPlanningDisplay();
+    }
+
+    private boolean canBeAssigned(Resource r, Task t, DayOfWeek d, Planning p, int countAssigned) {
+        return countAssigned < t.getNumberOfResources() && p.isResourceAvailableForTask(r, t, d);
     }
 }

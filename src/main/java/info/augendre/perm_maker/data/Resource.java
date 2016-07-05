@@ -62,4 +62,8 @@ public class Resource {
         }
         return false;
     }
+
+    public int getNumberOfAvailabilities() {
+        return this.availability.getTasks().size();
+    }
 }
