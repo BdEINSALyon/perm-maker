@@ -94,7 +94,7 @@ public class MainPanel {
         for (int i = 1; i < 8; i++) {
             permTableHeaders.add(DayOfWeek.of(i));
         }
-        permTable = new PermTable(new PermTableModel(permTableHeaders, 0)) {
+        permTable = new PermTable(new PermTableModel(permTableHeaders)) {
         };
         permTableModel = (DefaultTableModel) permTable.getModel();
     }

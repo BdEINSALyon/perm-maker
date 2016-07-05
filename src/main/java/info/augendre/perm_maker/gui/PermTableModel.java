@@ -8,8 +8,8 @@ import java.util.Vector;
  */
 public class PermTableModel extends DefaultTableModel {
 
-    public PermTableModel(Vector vector, int i) {
-        super(vector, i);
+    public PermTableModel(Vector vector) {
+        super(vector, 0);
     }
 
     @Override
