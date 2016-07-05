@@ -25,14 +25,12 @@ public class MainPanel {
     private JButton availabilityButton;
     private JButton planningButton;
     private JButton assignTasksButton;
-    private JFrame mainFrame;
     private Planning planning;
     private DefaultTableModel permTableModel;
     private Vector<Object> permTableHeaders;
     private ArrayList<Resource> resources;
 
-    public MainPanel(JFrame mainFrame) {
-        this.mainFrame = mainFrame;
+    public MainPanel() {
         this.planning = new Planning();
         this.resources = new ArrayList<>();
         $$$setupUI$$$();

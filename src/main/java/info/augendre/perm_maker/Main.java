@@ -18,7 +18,7 @@ public class Main implements Runnable {
 
     public Main() {
         mainFrame = new JFrame("Perm Maker");
-        this.mainPanel = new MainPanel(mainFrame).getMainPanel();
+        this.mainPanel = new MainPanel().getMainPanel();
     }
 
     public static void main(String[] args) {
