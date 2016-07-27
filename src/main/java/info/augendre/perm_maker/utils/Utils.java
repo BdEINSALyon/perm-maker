@@ -14,4 +14,9 @@ public class Utils {
         Instant startInstant = Instant.ofEpochMilli(date.getTime());
         return LocalDateTime.ofInstant(startInstant, ZoneId.systemDefault()).toLocalTime();
     }
+
+    public static String normalizeVersionNumber(String versionNumber) {
+        if (versionNumber.startsWith("v")) versionNumber = versionNumber.substring(1);
+        return versionNumber;
+    }
 }
