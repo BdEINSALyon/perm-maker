@@ -6,11 +6,11 @@ This application DOES NOT SAVE anything. It will may be added in a future versio
 
 ## How to use ?
 ### Launch
-#### Linux and OS X
+#### Linux
 ```
 java -jar perm-maker.jar
 ```
-#### Windows
+#### Windows and macOS
 Double click on the JAR.
 
 ### Main Frame
