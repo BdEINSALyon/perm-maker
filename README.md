@@ -6,13 +6,15 @@ This application DOES NOT SAVE anything. It will may be added in a future versio
 
 ## How to use ?
 ### Launch
+At startup, the application automatically checks for an update. If an update is available, a dialog is shown to the user.
+
 #### Linux
 ```
 java -jar perm-maker.jar
 ```
 #### Windows and macOS
 Double click on the JAR.
-f
+
 ### Main Frame
 The main frame contains three buttons and a table to show the results.
 
