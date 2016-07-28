@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.repo>BdEINSALyon/perm-maker</project.repo>
+        <project.license>https://github.com/BdEINSALyon/perm-maker/blob/master/LICENSE</project.license>
     </properties>
 
     <build>
@@ -66,6 +67,7 @@
                 <version>1.1.0</version>
                 <configuration>
                     <mainClass>info.augendre.perm_maker.Main</mainClass>
+                    <!--<generateDiskImageFile>true</generateDiskImageFile>-->
                 </configuration>
                 <executions>
                     <execution>
