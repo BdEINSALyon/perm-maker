@@ -12,7 +12,7 @@ java -jar perm-maker.jar
 ```
 #### Windows and macOS
 Double click on the JAR.
-
+f
 ### Main Frame
 The main frame contains three buttons and a table to show the results.
 
@@ -34,7 +34,7 @@ Here you can create resources. A resource is typically a person.
 
 A person has a name (which will be displayed in the table) and multiple availabilities.
 
-The abilities shown are deducted from the planning you set earlier. It corresponds to a day and a time slot :
+The availabilities shown are deducted from the planning you set earlier. It corresponds to a day and a time slot :
 
 - If multiple tasks are the same day and at the same time slot, only one availability will be showned.
 - If you have Task A on Monday from 10 to 11 and Task B from 10 to 12, two availabilities will be showned. Selecting only the largest WILL NOT allow the resource to be assigned the smallest.
