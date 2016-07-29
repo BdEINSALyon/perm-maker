@@ -12,18 +12,14 @@ import info.augendre.perm_maker.data.Task;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class DefinePlanningDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton addTaskButton;
     private JButton removeTaskButton;
-    private JList<Object> tasksList;
+    private JList<Task> tasksList;
     private JButton defaultPlanningButton;
     private JButton editTaskButton;
     private Planning planning;
@@ -31,21 +27,19 @@ public class DefinePlanningDialog extends JDialog {
     public DefinePlanningDialog(Planning planning) {
         this.planning = planning;
         $$$setupUI$$$();
-        tasksList.setListData(planning.getTasks().toArray());
-        tasksList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.refreshTaskList();
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
-        buttonOK.addActionListener(e -> onOK());
 
+        buttonOK.addActionListener(e -> onOK());
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onOK();
             }
         });
-
         contentPane.registerKeyboardAction(e -> onOK(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         addTaskButton.addActionListener(new AddTaskAction(this));
@@ -53,7 +47,7 @@ public class DefinePlanningDialog extends JDialog {
 
         removeTaskButton.addActionListener(actionEvent -> {
             if (!tasksList.isSelectionEmpty()) {
-                removeTask((Task) tasksList.getSelectedValue());
+                removeTask(tasksList.getSelectedValuesList());
             }
         });
         defaultPlanningButton.addActionListener(new DefaultPlanningAction(this));
@@ -70,11 +64,15 @@ public class DefinePlanningDialog extends JDialog {
     }
 
     public Task getSelectedTask() {
-        return (Task) tasksList.getSelectedValue();
+        return tasksList.getSelectedValue();
+    }
+
+    public java.util.List<Task> getSelectedTasks() {
+        return tasksList.getSelectedValuesList();
     }
 
     private void refreshTaskList() {
-        tasksList.setListData(planning.getTasks().toArray());
+        tasksList.setListData(planning.getTasks().toArray(new Task[0]));
     }
 
     public void removeTask(Task task) {
@@ -82,9 +80,20 @@ public class DefinePlanningDialog extends JDialog {
         refreshTaskList();
     }
 
+    public void removeTask(java.util.List<Task> tasksList) {
+        for (Task t : tasksList) {
+            planning.removeTask(t);
+        }
+        refreshTaskList();
+    }
+
     public void resetTasks() {
         planning.resetTasks();
         refreshTaskList();
+    }
+
+    public boolean isSelectionEmpty() {
+        return tasksList.isSelectionEmpty();
     }
 
     private void createUIComponents() {

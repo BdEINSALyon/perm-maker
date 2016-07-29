@@ -6,6 +6,7 @@ import info.augendre.perm_maker.gui.TaskDialog;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 /**
  * Created by gaugendre on 18/04/2016 13:00
@@ -19,12 +20,14 @@ public class EditTaskAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Task task = definePlanningDialog.getSelectedTask();
-        if (task != null) {
-            TaskDialog dialog = new TaskDialog(task);
-            dialog.pack();
-            dialog.setLocationRelativeTo(null);
-            dialog.setVisible(true);
+        if (!definePlanningDialog.isSelectionEmpty()) {
+            List<Task> resources = definePlanningDialog.getSelectedTasks();
+            resources.stream().filter(task -> task != null).forEachOrdered(task -> {
+                TaskDialog dialog = new TaskDialog(task);
+                dialog.pack();
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            });
         }
     }
 }
