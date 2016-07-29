@@ -18,6 +18,10 @@ public class Planning {
         return tasks;
     }
 
+    public int size() {
+        return tasks.size();
+    }
+
     public void resetTasks() {
         this.tasks = new ArrayList<>();
     }

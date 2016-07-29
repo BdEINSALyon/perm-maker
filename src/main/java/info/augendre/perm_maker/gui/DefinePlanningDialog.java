@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import info.augendre.perm_maker.actions.AddTaskAction;
+import info.augendre.perm_maker.actions.CreateDoodleAction;
 import info.augendre.perm_maker.actions.DefaultPlanningAction;
 import info.augendre.perm_maker.actions.EditTaskAction;
 import info.augendre.perm_maker.data.Planning;
@@ -12,7 +13,9 @@ import info.augendre.perm_maker.listeners.AllowEditListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ResourceBundle;
 
 public class DefinePlanningDialog extends JDialog {
@@ -23,6 +26,7 @@ public class DefinePlanningDialog extends JDialog {
     private JList<Task> tasksList;
     private JButton defaultPlanningButton;
     private JButton editTaskButton;
+    private JButton createDoodleButton;
     private Planning planning;
 
     public DefinePlanningDialog(Planning planning) {
@@ -56,6 +60,7 @@ public class DefinePlanningDialog extends JDialog {
             }
         });
         defaultPlanningButton.addActionListener(new DefaultPlanningAction(this));
+        createDoodleButton.addActionListener(new CreateDoodleAction(this, planning));
     }
 
     private void onOK() {

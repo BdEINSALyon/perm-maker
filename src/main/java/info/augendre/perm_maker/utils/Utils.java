@@ -22,6 +22,10 @@ public class Utils {
         return Date.from(instant);
     }
 
+    public static LocalDate localDateFromDate(Date date) {
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault()).toLocalDate();
+    }
+
     public static String normalizeVersionNumber(String versionNumber) {
         if (versionNumber.startsWith("v")) versionNumber = versionNumber.substring(1);
         return versionNumber;
