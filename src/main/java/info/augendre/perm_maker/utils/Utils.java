@@ -32,7 +32,7 @@ public class Utils {
                     Desktop.getDesktop().browse(event.getURL().toURI());
                 }
                 catch (IOException | URISyntaxException e1) {
-                    e1.printStackTrace();
+                    System.err.println("Can't open desktop default browser.");
                 }
             }
         });

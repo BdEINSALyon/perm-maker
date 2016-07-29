@@ -33,7 +33,7 @@ public class Main implements Runnable {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
         catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace(System.err);
+            System.err.println("Can't set Look and Feel.");
         }
 
         SwingUtilities.invokeLater(new Main());
@@ -65,7 +65,6 @@ public class Main implements Runnable {
                     .invoke(app, al);
             }
             catch (Exception e) {
-                e.printStackTrace();
                 //fail quietly
             }
         }

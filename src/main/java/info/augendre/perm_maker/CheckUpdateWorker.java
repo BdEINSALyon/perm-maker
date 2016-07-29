@@ -32,7 +32,6 @@ public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
                     String currentVersion = projectBundle.getString("version");
                     releaseTagName = Utils.normalizeVersionNumber(releaseTagName);
                     currentVersion = Utils.normalizeVersionNumber(currentVersion);
-                    System.out.println("Fetched all information");
 
                     return !releaseTagName.equals(currentVersion);
                 }
@@ -40,7 +39,6 @@ public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
         }
         catch (IOException e) {
             System.err.println("Can't check for updates. Please check your internet connection.");
-            e.printStackTrace();
         }
         return false;
     }
@@ -54,7 +52,6 @@ public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
         catch (InterruptedException | ExecutionException e) {
             updateAvailable = false;
             System.err.println("Error getting value from update check. Thread may have been interrupted.");
-            e.printStackTrace();
         }
 
         if (updateAvailable) {
