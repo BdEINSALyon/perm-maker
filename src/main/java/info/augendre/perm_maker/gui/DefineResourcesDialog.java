@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 public class DefineResourcesDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
-    private JList<Object> resourcesList;
+    private JList<Resource> resourcesList;
     private JButton addResourceButton;
     private JButton removeResourceButton;
     private JButton editResourceButton;
@@ -47,13 +47,13 @@ public class DefineResourcesDialog extends JDialog {
 
         removeResourceButton.addActionListener(actionEvent -> {
             if (!resourcesList.isSelectionEmpty()) {
-                removeResource((Resource) resourcesList.getSelectedValue());
+                removeResource(resourcesList.getSelectedValuesList());
             }
         });
     }
 
     private void refreshResourcesList() {
-        resourcesList.setListData(mainPanel.getResources().toArray());
+        resourcesList.setListData(mainPanel.getResources().toArray(new Resource[0]));
     }
 
     public void addResource(Resource r) {
@@ -66,8 +66,15 @@ public class DefineResourcesDialog extends JDialog {
         refreshResourcesList();
     }
 
+    public void removeResource(java.util.List<Resource> resourcesList) {
+        for (Resource r : resourcesList) {
+            mainPanel.getResources().remove(r);
+        }
+        refreshResourcesList();
+    }
+
     public Resource getSelectedResource() {
-        return (Resource) resourcesList.getSelectedValue();
+        return resourcesList.getSelectedValue();
     }
 
     private void onOK() {
