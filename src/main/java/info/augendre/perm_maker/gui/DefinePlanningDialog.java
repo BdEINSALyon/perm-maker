@@ -4,14 +4,13 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import info.augendre.perm_maker.actions.AddTaskAction;
+import info.augendre.perm_maker.actions.EditTaskAction;
 import info.augendre.perm_maker.data.Planning;
 import info.augendre.perm_maker.data.Task;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -25,6 +24,7 @@ public class DefinePlanningDialog extends JDialog {
     private JButton removeTaskButton;
     private JList<Object> tasksList;
     private JButton button1;
+    private JButton editTaskButton;
     private Planning planning;
 
     public DefinePlanningDialog(Planning planning) {
@@ -48,6 +48,7 @@ public class DefinePlanningDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onOK(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         addTaskButton.addActionListener(new AddTaskAction(this));
+        editTaskButton.addActionListener(new EditTaskAction(this));
 
         removeTaskButton.addActionListener(actionEvent -> {
             if (!tasksList.isSelectionEmpty()) {
@@ -106,6 +107,10 @@ public class DefinePlanningDialog extends JDialog {
     public void addTask(Task task) {
         planning.addTask(task);
         refreshTaskList();
+    }
+
+    public Task getSelectedTask() {
+        return (Task) tasksList.getSelectedValue();
     }
 
     private void refreshTaskList() {

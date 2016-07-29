@@ -50,6 +50,10 @@ public class Task {
                 endTime.get(ChronoField.HOUR_OF_DAY) + ":" + endTime.get(ChronoField.MINUTE_OF_HOUR) + ")";
     }
 
+    public String getLabel() {
+        return label;
+    }
+
     public void setLabel(String label) {
         this.label = label;
     }

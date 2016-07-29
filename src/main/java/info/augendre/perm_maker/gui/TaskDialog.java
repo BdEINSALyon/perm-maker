@@ -34,6 +34,8 @@ public class TaskDialog extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
+        this.fillFields();
+
         buttonOK.addActionListener(e -> onOK());
 
         buttonCancel.addActionListener(e -> onCancel());
@@ -48,6 +50,13 @@ public class TaskDialog extends JDialog {
 
 // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void fillFields() {
+        labelField.setText(task.getLabel());
+//        startTimeSpinner.setValue(task.getStartTime().toString());
+//        endTimeSpinner.setValue(task.getEndTime().toString());
+        numberOfResourcesSpinner.setValue(task.getNumberOfResources());
     }
 
     private void onOK() {
