@@ -83,6 +83,14 @@ public class DefineResourcesDialog extends JDialog {
         return resourcesList.getSelectedValue();
     }
 
+    public java.util.List<Resource> getSelectedResources() {
+        return resourcesList.getSelectedValuesList();
+    }
+
+    public boolean isSelectionEmpty() {
+        return resourcesList.isSelectionEmpty();
+    }
+
     private void onOK() {
 // add your code here
         dispose();

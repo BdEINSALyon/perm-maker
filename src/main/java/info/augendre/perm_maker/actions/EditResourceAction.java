@@ -6,6 +6,7 @@ import info.augendre.perm_maker.gui.ResourceDialog;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 /**
  * Created by gaugendre on 18/04/2016 13:00
@@ -19,12 +20,14 @@ public class EditResourceAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Resource resource = defineResourcesDialog.getSelectedResource();
-        if (resource != null) {
-            ResourceDialog dialog = new ResourceDialog(resource, defineResourcesDialog.getMainPanel().getPlanning());
-            dialog.pack();
-            dialog.setLocationRelativeTo(null);
-            dialog.setVisible(true);
+        if (!defineResourcesDialog.isSelectionEmpty()) {
+            List<Resource> resources = defineResourcesDialog.getSelectedResources();
+            resources.stream().filter(resource -> resource != null).forEachOrdered(resource -> {
+                ResourceDialog dialog = new ResourceDialog(resource, defineResourcesDialog.getMainPanel().getPlanning());
+                dialog.pack();
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            });
         }
     }
 }
