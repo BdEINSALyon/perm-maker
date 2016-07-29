@@ -9,21 +9,17 @@ import org.kohsuke.github.PagedIterator;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
 /**
- * Created by gaugendre on 28/07/2016 00:46
+ * Created by gaugendre on 29/07/2016 02:10
  */
-public class CheckUpdateThread implements Runnable {
-    private JFrame mainFrame;
+public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
     private ResourceBundle projectBundle = ResourceBundle.getBundle("project");
     private ResourceBundle stringsBundle = ResourceBundle.getBundle("strings");
 
-    public CheckUpdateThread(JFrame mainFrame) {
-        this.mainFrame = mainFrame;
-    }
-
     @Override
-    public void run() {
+    protected Boolean doInBackground() throws Exception {
         try {
             GitHub gitHub = GitHub.connectAnonymously();
             GHRepository repo = gitHub.getRepository(projectBundle.getString("repo"));
@@ -38,20 +34,36 @@ public class CheckUpdateThread implements Runnable {
                     currentVersion = Utils.normalizeVersionNumber(currentVersion);
                     System.out.println("Fetched all information");
 
-                    if (!releaseTagName.equals(currentVersion)) {
-                        JOptionPane.showMessageDialog(
-                            mainFrame,
-                            stringsBundle.getString("project-update_available") +
-                                "\n"+
-                                projectBundle.getString("releases_url")
-                        );
-                    }
+                    return !releaseTagName.equals(currentVersion);
                 }
             }
         }
         catch (IOException e) {
-            System.out.println("Can't check for updates. Please check your internet connection.");
+            System.err.println("Can't check for updates. Please check your internet connection.");
             e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    protected void done() {
+        boolean updateAvailable;
+        try {
+            updateAvailable = get();
+        }
+        catch (InterruptedException | ExecutionException e) {
+            updateAvailable = false;
+            System.err.println("Error getting value from update check. Thread may have been interrupted.");
+            e.printStackTrace();
+        }
+
+        if (updateAvailable) {
+            JOptionPane.showMessageDialog(
+                null,
+                stringsBundle.getString("project-update_available") +
+                    "\n"+
+                    projectBundle.getString("releases_url")
+            );
         }
     }
 }

@@ -59,7 +59,8 @@ public class Main implements Runnable {
         mainFrame.setJMenuBar(menuBar);
 
         // Launch thread for update check
-        SwingUtilities.invokeLater(new CheckUpdateThread(mainFrame));
+        CheckUpdateWorker checkUpdate = new CheckUpdateWorker();
+        checkUpdate.execute();
     }
 
 }
