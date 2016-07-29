@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import info.augendre.perm_maker.data.Task;
+import info.augendre.perm_maker.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +12,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class TaskDialog extends JDialog {
     private JPanel contentPane;
@@ -54,9 +57,17 @@ public class TaskDialog extends JDialog {
 
     private void fillFields() {
         labelField.setText(task.getLabel());
-//        startTimeSpinner.setValue(task.getStartTime().toString());
-//        endTimeSpinner.setValue(task.getEndTime().toString());
+        startTimeSpinner.setValue(Utils.dateFromLocalTime(task.getStartTime()));
+        endTimeSpinner.setValue(Utils.dateFromLocalTime(task.getEndTime()));
         numberOfResourcesSpinner.setValue(task.getNumberOfResources());
+
+        int[] selectedDays = new int[task.getDays().size()];
+        int i = 0;
+        for (DayOfWeek d : task.getDays()) {
+            selectedDays[i] = d.getValue() - 1;
+            i++;
+        }
+        dayList.setSelectedIndices(selectedDays);
     }
 
     private void onOK() {

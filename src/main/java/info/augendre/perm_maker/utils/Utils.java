@@ -5,10 +5,7 @@ import javax.swing.event.HyperlinkEvent;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.Date;
 
 /**
@@ -18,6 +15,11 @@ public class Utils {
     public static LocalTime localTimeFromDate(Date date) {
         Instant startInstant = Instant.ofEpochMilli(date.getTime());
         return LocalDateTime.ofInstant(startInstant, ZoneId.systemDefault()).toLocalTime();
+    }
+
+    public static Date dateFromLocalTime(LocalTime localTime) {
+        Instant instant = localTime.atDate(LocalDate.of(2000, 1, 1)).atZone(ZoneId.systemDefault()).toInstant();
+        return Date.from(instant);
     }
 
     public static String normalizeVersionNumber(String versionNumber) {
