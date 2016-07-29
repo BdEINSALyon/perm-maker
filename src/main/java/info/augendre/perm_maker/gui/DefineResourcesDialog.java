@@ -6,6 +6,7 @@ import com.intellij.uiDesigner.core.Spacer;
 import info.augendre.perm_maker.actions.AddResourceAction;
 import info.augendre.perm_maker.actions.EditResourceAction;
 import info.augendre.perm_maker.data.Resource;
+import info.augendre.perm_maker.listeners.AllowEditListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,6 +32,11 @@ public class DefineResourcesDialog extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
+        editResourceButton.setEnabled(false);
+        removeResourceButton.setEnabled(false);
+
+        resourcesList.getSelectionModel().addListSelectionListener(new AllowEditListener(editResourceButton));
+        resourcesList.getSelectionModel().addListSelectionListener(new AllowEditListener(removeResourceButton));
         buttonOK.addActionListener(e -> onOK());
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
