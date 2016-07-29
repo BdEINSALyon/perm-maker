@@ -67,7 +67,7 @@
                   <text resource-bundle="strings" key="task-remove"/>
                 </properties>
               </component>
-              <component id="b5935" class="javax.swing.JButton" binding="button1" default-binding="true">
+              <component id="b5935" class="javax.swing.JButton" binding="defaultPlanningButton">
                 <constraints>
                   <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
