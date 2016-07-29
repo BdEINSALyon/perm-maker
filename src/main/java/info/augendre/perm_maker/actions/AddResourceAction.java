@@ -24,6 +24,8 @@ public class AddResourceAction extends AbstractAction {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-        defineResourcesDialog.addResource(resource);
+        if (dialog.getValue()) {
+            defineResourcesDialog.addResource(resource);
+        }
     }
 }
