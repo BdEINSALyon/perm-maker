@@ -34,18 +34,16 @@ public class DefineResourcesDialog extends JDialog {
 
         editResourceButton.setEnabled(false);
         removeResourceButton.setEnabled(false);
+        resourcesList.addListSelectionListener(new AllowEditListener(editResourceButton));
+        resourcesList.addListSelectionListener(new AllowEditListener(removeResourceButton));
 
-        resourcesList.getSelectionModel().addListSelectionListener(new AllowEditListener(editResourceButton));
-        resourcesList.getSelectionModel().addListSelectionListener(new AllowEditListener(removeResourceButton));
         buttonOK.addActionListener(e -> onOK());
-
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onOK();
             }
         });
-
         contentPane.registerKeyboardAction(e -> onOK(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         addResourceButton.addActionListener(new AddResourceAction(this));

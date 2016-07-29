@@ -17,12 +17,7 @@ public class AllowEditListener implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
-            if (e.getFirstIndex() >= 0) {
-                button.setEnabled(true);
-            }
-            else {
-                button.setEnabled(false);
-            }
+            button.setEnabled(!((JList) e.getSource()).isSelectionEmpty());
         }
     }
 }
