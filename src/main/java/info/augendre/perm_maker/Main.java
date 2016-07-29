@@ -44,12 +44,6 @@ public class Main implements Runnable {
         mainPanel.getInputMap(AFC).put(escapeStroke, CLOSE);
         mainPanel.getActionMap().put(CLOSE, new QuitAction(mainFrame));
 
-        mainFrame.setContentPane(mainPanel);
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainFrame.pack();
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setVisible(true);
-
         JMenuBar menuBar = new JMenuBar();
         JMenu helpMenu = new JMenu(stringsBundle.getString("menu-help"));
         JMenuItem aboutThisApp = new JMenuItem(new AboutAction(mainFrame));
@@ -57,6 +51,12 @@ public class Main implements Runnable {
         menuBar.add(helpMenu);
 
         mainFrame.setJMenuBar(menuBar);
+
+        mainFrame.setContentPane(mainPanel);
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mainFrame.pack();
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);
 
         // Launch thread for update check
         CheckUpdateWorker checkUpdate = new CheckUpdateWorker();
