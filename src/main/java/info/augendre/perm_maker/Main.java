@@ -1,9 +1,11 @@
 package info.augendre.perm_maker;
 
 import info.augendre.perm_maker.actions.AboutAction;
+import info.augendre.perm_maker.actions.AboutListener;
 import info.augendre.perm_maker.actions.QuitAction;
 import info.augendre.perm_maker.gui.MainPanel;
 import info.augendre.perm_maker.utils.Utils;
+import info.augendre.perm_maker.workers.CheckUpdateWorker;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

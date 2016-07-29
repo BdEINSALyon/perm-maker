@@ -1,6 +1,4 @@
-package info.augendre.perm_maker;
-
-import info.augendre.perm_maker.actions.AboutAction;
+package info.augendre.perm_maker.actions;
 
 import javax.swing.*;
 import java.lang.reflect.InvocationHandler;
