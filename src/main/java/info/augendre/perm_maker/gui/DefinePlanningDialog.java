@@ -8,6 +8,7 @@ import info.augendre.perm_maker.actions.DefaultPlanningAction;
 import info.augendre.perm_maker.actions.EditTaskAction;
 import info.augendre.perm_maker.data.Planning;
 import info.augendre.perm_maker.data.Task;
+import info.augendre.perm_maker.listeners.AllowEditListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +33,10 @@ public class DefinePlanningDialog extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
+        editTaskButton.setEnabled(false);
+        removeTaskButton.setEnabled(false);
+        tasksList.addListSelectionListener(new AllowEditListener(editTaskButton));
+        tasksList.addListSelectionListener(new AllowEditListener(removeTaskButton));
 
         buttonOK.addActionListener(e -> onOK());
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
