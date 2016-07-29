@@ -20,9 +20,11 @@ public class EditTaskAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         Task task = definePlanningDialog.getSelectedTask();
-        TaskDialog dialog = new TaskDialog(task);
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        if (task != null) {
+            TaskDialog dialog = new TaskDialog(task);
+            dialog.pack();
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }
     }
 }

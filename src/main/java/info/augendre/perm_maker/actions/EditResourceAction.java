@@ -20,9 +20,11 @@ public class EditResourceAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         Resource resource = defineResourcesDialog.getSelectedResource();
-        ResourceDialog dialog = new ResourceDialog(resource, defineResourcesDialog.getMainPanel().getPlanning());
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        if (resource != null) {
+            ResourceDialog dialog = new ResourceDialog(resource, defineResourcesDialog.getMainPanel().getPlanning());
+            dialog.pack();
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }
     }
 }
