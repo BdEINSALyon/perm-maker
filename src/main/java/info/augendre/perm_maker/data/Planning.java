@@ -1,8 +1,7 @@
 package info.augendre.perm_maker.data;
 
 import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -65,5 +64,38 @@ public class Planning {
 
     public void clearAssignments() {
         this.tasks.forEach(Task::clearAssignments);
+    }
+
+    public List<Task> getAvailabilitiesList() {
+        Set<Task> tasksSet = new HashSet<>();
+        for (Task t : this.getTasks()) {
+            for (DayOfWeek d : t.getDays()) {
+                Task otherTask = new Task();
+                otherTask.setLabel("dispo");
+                otherTask.setNumberOfResources(0);
+                otherTask.addDay(d);
+                otherTask.setStartTime(t.getStartTime());
+                otherTask.setEndTime(t.getEndTime());
+                tasksSet.add(otherTask);
+            }
+        }
+
+        Task[] tasks = tasksSet.toArray(new Task[0]);
+        ArrayList<Task> tasksList = new ArrayList<>(Arrays.asList(tasks));
+
+        tasksList.sort((task, t1) -> {
+            DayOfWeek taskDay = task.getDays().iterator().next();
+            DayOfWeek t1Day = t1.getDays().iterator().next();
+
+            if (taskDay.getValue() < t1Day.getValue()) {
+                return -1;
+            } else if (taskDay.getValue() == t1Day.getValue()) {
+                return task.getStartTime().compareTo(t1.getStartTime());
+            } else {
+                return 1;
+            }
+        });
+
+        return tasksList;
     }
 }

@@ -14,6 +14,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.DayOfWeek;
 import java.util.*;
+import java.util.List;
 
 public class ResourceDialog extends JDialog {
     private JPanel contentPane;
@@ -91,36 +92,8 @@ public class ResourceDialog extends JDialog {
 
     private void createUIComponents() {
         availabilitiesList = new JList<>();
-        Set<Task> tasksSet = new HashSet<>();
 
-        for (Task t : planning.getTasks()) {
-            for (DayOfWeek d : t.getDays()) {
-                Task otherTask = new Task();
-                otherTask.setLabel("dispo");
-                otherTask.setNumberOfResources(0);
-                otherTask.addDay(d);
-                otherTask.setStartTime(t.getStartTime());
-                otherTask.setEndTime(t.getEndTime());
-                tasksSet.add(otherTask);
-            }
-        }
-
-        Object[] tasks = tasksSet.toArray();
-        ArrayList<Object> oList = new ArrayList<>(Arrays.asList(tasks));
-        ArrayList<Task> tasksList = (ArrayList<Task>) (Object) oList;
-
-        tasksList.sort((task, t1) -> {
-            DayOfWeek taskDay = task.getDays().iterator().next();
-            DayOfWeek t1Day = t1.getDays().iterator().next();
-
-            if (taskDay.getValue() < t1Day.getValue()) {
-                return -1;
-            } else if (taskDay.getValue() == t1Day.getValue()) {
-                return task.getStartTime().compareTo(t1.getStartTime());
-            } else {
-                return 1;
-            }
-        });
+        List<Task> tasksList = planning.getAvailabilitiesList();
 
         availabilitiesList.setListData(tasksList.toArray());
     }
