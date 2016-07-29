@@ -64,7 +64,7 @@ public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
             JOptionPane.showMessageDialog(
                 null,
                 editorPane,
-                stringsBundle.getString("project.update_available_title"),
+                stringsBundle.getString("project-update_available_title"),
                 JOptionPane.INFORMATION_MESSAGE
             );
         }
