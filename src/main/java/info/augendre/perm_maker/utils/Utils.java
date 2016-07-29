@@ -65,4 +65,8 @@ public class Utils {
 
         return htmlEditorPaneFactory(html, style);
     }
+
+    public static boolean isMac() {
+        return System.getProperty("os.name").contains("Mac");
+    }
 }

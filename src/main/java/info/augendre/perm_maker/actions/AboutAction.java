@@ -20,6 +20,10 @@ public class AboutAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        this.showDialog();
+    }
+
+    public void showDialog() {
         JEditorPane editorPane = Utils.htmlEditorPaneFactory(
             stringsBundle.getString("menu-aboutdialog-message")
         );

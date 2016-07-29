@@ -3,10 +3,11 @@ package info.augendre.perm_maker;
 import info.augendre.perm_maker.actions.AboutAction;
 import info.augendre.perm_maker.actions.QuitAction;
 import info.augendre.perm_maker.gui.MainPanel;
+import info.augendre.perm_maker.utils.Utils;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Proxy;
 import java.util.ResourceBundle;
 
 /**
@@ -44,13 +45,31 @@ public class Main implements Runnable {
         mainPanel.getInputMap(AFC).put(escapeStroke, CLOSE);
         mainPanel.getActionMap().put(CLOSE, new QuitAction(mainFrame));
 
-        JMenuBar menuBar = new JMenuBar();
-        JMenu helpMenu = new JMenu(stringsBundle.getString("menu-help"));
-        JMenuItem aboutThisApp = new JMenuItem(new AboutAction(mainFrame));
-        helpMenu.add(aboutThisApp);
-        menuBar.add(helpMenu);
+        if (Utils.isMac()) {
+            // Found at https://stackoverflow.com/a/11094687/2758732
+            try {
+                Object app = Class.forName("com.apple.eawt.Application").getMethod("getApplication",
+                    (Class[]) null).invoke(null, (Object[]) null);
 
-        mainFrame.setJMenuBar(menuBar);
+                Object al = Proxy.newProxyInstance(Class.forName("com.apple.eawt.AboutHandler")
+                        .getClassLoader(), new Class[]{Class.forName("com.apple.eawt.AboutHandler")},
+                    new AboutListener(mainFrame));
+                app.getClass().getMethod("setAboutHandler", new Class[]{
+                    Class.forName("com.apple.eawt.AboutHandler")}).invoke(app, new Object[]{al});
+            }
+            catch (Exception e) {
+                //fail quietly
+            }
+        }
+        else {
+            JMenuBar menuBar = new JMenuBar();
+            JMenu helpMenu = new JMenu(stringsBundle.getString("menu-help"));
+            JMenuItem aboutThisApp = new JMenuItem(new AboutAction(mainFrame));
+            helpMenu.add(aboutThisApp);
+            menuBar.add(helpMenu);
+
+            mainFrame.setJMenuBar(menuBar);
+        }
 
         mainFrame.setContentPane(mainPanel);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
