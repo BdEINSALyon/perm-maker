@@ -58,11 +58,17 @@ public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
         }
 
         if (updateAvailable) {
+            JEditorPane editorPane = Utils.htmlEditorPaneFactory(
+                stringsBundle.getString("project-update_available") +
+                " <a href=\""+
+                projectBundle.getString("releases_url") +
+                "\">GitHub</a>"
+            );
             JOptionPane.showMessageDialog(
                 null,
-                stringsBundle.getString("project-update_available") +
-                    "\n"+
-                    projectBundle.getString("releases_url")
+                editorPane,
+                stringsBundle.getString("project.update_available_title"),
+                JOptionPane.INFORMATION_MESSAGE
             );
         }
     }
