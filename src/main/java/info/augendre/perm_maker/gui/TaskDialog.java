@@ -25,6 +25,7 @@ public class TaskDialog extends JDialog {
     private JSpinner numberOfResourcesSpinner;
     private JList<DayOfWeek> dayList;
     private Task task;
+    private boolean ok = false;
 
     public TaskDialog(Task task) {
         this.task = task;
@@ -63,12 +64,16 @@ public class TaskDialog extends JDialog {
 
         task.setNumberOfResources((Integer) numberOfResourcesSpinner.getValue());
 
+        this.ok = true;
         dispose();
     }
 
     private void onCancel() {
-// add your code here if necessary
         dispose();
+    }
+
+    public boolean getValue() {
+        return this.ok;
     }
 
     private void createUIComponents() {

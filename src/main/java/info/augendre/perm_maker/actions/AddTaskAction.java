@@ -24,6 +24,8 @@ public class AddTaskAction extends AbstractAction {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-        definePlanningDialog.addTask(task);
+        if (dialog.getValue()) {
+            definePlanningDialog.addTask(task);
+        }
     }
 }
