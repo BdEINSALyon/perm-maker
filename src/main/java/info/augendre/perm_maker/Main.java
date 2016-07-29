@@ -48,16 +48,24 @@ public class Main implements Runnable {
         if (Utils.isMac()) {
             // Found at https://stackoverflow.com/a/11094687/2758732
             try {
-                Object app = Class.forName("com.apple.eawt.Application").getMethod("getApplication",
-                    (Class[]) null).invoke(null, (Object[]) null);
+                // Get an application object
+                Object app = Class.forName("com.apple.eawt.Application")
+                    .getMethod("getApplication")
+                    .invoke(null);
 
-                Object al = Proxy.newProxyInstance(Class.forName("com.apple.eawt.AboutHandler")
-                        .getClassLoader(), new Class[]{Class.forName("com.apple.eawt.AboutHandler")},
-                    new AboutListener(mainFrame));
-                app.getClass().getMethod("setAboutHandler", new Class[]{
-                    Class.forName("com.apple.eawt.AboutHandler")}).invoke(app, new Object[]{al});
+                Object al = Proxy.newProxyInstance(
+                    Class.forName("com.apple.eawt.AboutHandler").getClassLoader(), // 3) But construct it as a AboutHandler so we can use it below
+                    new Class[]{Class.forName("com.apple.eawt.AboutHandler")}, // 1) Instead of calling some method from AboutHandler interface
+                    new AboutListener(mainFrame) // 2) .invoke() our AboutListener
+                );
+
+                // Set the handler
+                app.getClass()
+                    .getMethod("setAboutHandler", Class.forName("com.apple.eawt.AboutHandler"))
+                    .invoke(app, al);
             }
             catch (Exception e) {
+                e.printStackTrace();
                 //fail quietly
             }
         }
