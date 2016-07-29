@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import info.augendre.perm_maker.actions.AddResourceAction;
+import info.augendre.perm_maker.actions.EditResourceAction;
 import info.augendre.perm_maker.data.Resource;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ public class DefineResourcesDialog extends JDialog {
     private JList<Object> resourcesList;
     private JButton addResourceButton;
     private JButton removeResourceButton;
+    private JButton editResourceButton;
     private MainPanel mainPanel;
 
     public DefineResourcesDialog(MainPanel mainPanel) {
@@ -41,6 +43,7 @@ public class DefineResourcesDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onOK(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         addResourceButton.addActionListener(new AddResourceAction(this));
+        editResourceButton.addActionListener(new EditResourceAction(this));
 
         removeResourceButton.addActionListener(actionEvent -> {
             if (!resourcesList.isSelectionEmpty()) {
@@ -61,6 +64,10 @@ public class DefineResourcesDialog extends JDialog {
     public void removeResource(Resource r) {
         mainPanel.getResources().remove(r);
         refreshResourcesList();
+    }
+
+    public Resource getSelectedResource() {
+        return (Resource) resourcesList.getSelectedValue();
     }
 
     private void onOK() {

@@ -27,14 +27,35 @@ public class ResourceDialog extends JDialog {
         $$$setupUI$$$();
         setContentPane(contentPane);
 
+        this.fillFields();
+
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(e -> onOK());
     }
 
+    private void fillFields() {
+        nameField.setText(resource.getName());
+
+        int[] selectedAvailabilities = new int[resource.getNumberOfAvailabilities()];
+        ListModel<Object> listModel = availabilitiesList.getModel();
+        ArrayList<Task> tasks = new ArrayList<>(listModel.getSize());
+        for (int i = 0; i < listModel.getSize(); i++) {
+            tasks.add(i, (Task) listModel.getElementAt(i));
+        }
+
+        int i = 0;
+        for (Task t : resource.getAvailability().getTasks()) {
+            selectedAvailabilities[i] = tasks.indexOf(t);
+            i++;
+        }
+        availabilitiesList.setSelectedIndices(selectedAvailabilities);
+    }
+
     private void onOK() {
         resource.setName(nameField.getText());
+        resource.getAvailability().resetTasks();
         for (Object o : availabilitiesList.getSelectedValuesList()) {
             resource.getAvailability().addTask((Task) o);
         }
