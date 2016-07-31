@@ -7,31 +7,25 @@ import java.util.stream.Collectors;
 /**
  * Created by gaugendre on 28/06/16
  */
-public class Planning {
-    private ArrayList<Task> tasks;
-
+public class Planning extends ArrayList<Task> {
     public Planning() {
-        this.tasks = new ArrayList<>();
+        super();
     }
 
     public ArrayList<Task> getTasks() {
-        return tasks;
-    }
-
-    public int size() {
-        return tasks.size();
+        return this;
     }
 
     public void resetTasks() {
-        this.tasks = new ArrayList<>();
+        this.clear();
     }
 
     public void addTask(Task task) {
-        this.tasks.add(task);
+        this.add(task);
     }
 
     public void removeTask(Task task) {
-        this.tasks.remove(task);
+        this.remove(task);
     }
 
     public boolean isResourceAvailableForTask(Resource resource, Task task, DayOfWeek day) {
@@ -39,7 +33,7 @@ public class Planning {
             return false;
         }
         int countAssigments = 0;
-        for (Task t : this.tasks) {
+        for (Task t : this) {
             for (ArrayList<Resource> resourcesList : t.getAssignedResources().values()) {
                 for (Resource r : resourcesList) {
                     if (r.equals(resource))
@@ -52,12 +46,12 @@ public class Planning {
     }
 
     public List<Task> getTasksForDay(DayOfWeek day) {
-        return this.tasks.stream().filter(t -> t.getDays().contains(day)).collect(Collectors.toCollection(ArrayList::new));
+        return this.stream().filter(t -> t.getDays().contains(day)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public List<Resource> getResourcesForDay(DayOfWeek day) {
         ArrayList<Resource> resources = new ArrayList<>();
-        this.tasks.stream().filter(t -> t.getDays().contains(day)).forEach(t -> {
+        this.stream().filter(t -> t.getDays().contains(day)).forEach(t -> {
             ArrayList<Resource> res = t.getAssignedResources().get(day);
             if (res != null) {
                 resources.addAll(t.getAssignedResources().get(day));
@@ -67,12 +61,12 @@ public class Planning {
     }
 
     public void clearAssignments() {
-        this.tasks.forEach(Task::clearAssignments);
+        this.forEach(Task::clearAssignments);
     }
 
     public List<Task> getAvailabilitiesList() {
         Set<Task> tasksSet = new HashSet<>();
-        for (Task t : this.getTasks()) {
+        for (Task t : this) {
             for (DayOfWeek d : t.getDays()) {
                 Task otherTask = new Task();
                 otherTask.setLabel("dispo");
