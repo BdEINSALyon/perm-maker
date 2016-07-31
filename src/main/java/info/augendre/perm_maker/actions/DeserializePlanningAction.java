@@ -3,6 +3,7 @@ package info.augendre.perm_maker.actions;
 import info.augendre.perm_maker.data.Planning;
 import info.augendre.perm_maker.gui.DefinePlanningDialog;
 
+import javax.swing.*;
 import java.io.Serializable;
 
 /**
@@ -10,10 +11,9 @@ import java.io.Serializable;
  */
 public class DeserializePlanningAction extends AbstractDeserializeAction {
     private static final long serialVersionUID = -1147713428016357223L;
-    private DefinePlanningDialog dialog;
 
     public DeserializePlanningAction(DefinePlanningDialog dialog) {
-        this.dialog = dialog;
+        super(dialog);
     }
 
     @Override
@@ -24,7 +24,12 @@ public class DeserializePlanningAction extends AbstractDeserializeAction {
         }
 
         Planning newPlanning = (Planning) element;
-        dialog.resetTasks();
-        dialog.addAllTasks(newPlanning);
+        getDialog().resetTasks();
+        getDialog().addAllTasks(newPlanning);
+    }
+
+    @Override
+    public DefinePlanningDialog getDialog() {
+        return (DefinePlanningDialog) super.getDialog();
     }
 }

@@ -1,6 +1,9 @@
 package info.augendre.perm_maker.actions;
 
+import info.augendre.perm_maker.data.Planning;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
 
@@ -18,11 +21,29 @@ public class SerializeAction<E extends Serializable> extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            FileOutputStream fos = new FileOutputStream("/tmp/address.ser");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(element);
-            oos.close();
-            fos.close();
+            FileDialog dialog;
+            String mHomeDir = System.getProperty("user.home");
+            String fileName = "untitled.perm";
+            if (element instanceof Planning) {
+                fileName = "planning.perm";
+            }
+
+            dialog = new FileDialog((Dialog) null, "Save", FileDialog.SAVE);
+            dialog.setDirectory(mHomeDir);
+            dialog.setFile(fileName);
+            dialog.setLocationRelativeTo(null);
+            dialog.setModal(true);
+            dialog.setVisible(true);
+
+            if (dialog.getFile() != null) {
+                String dir = dialog.getDirectory();
+                File file = new File(dir + dialog.getFile());
+                FileOutputStream fos = new FileOutputStream(file);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(element);
+                oos.close();
+                fos.close();
+            }
         }
         catch (IOException e1) {
             e1.printStackTrace();
