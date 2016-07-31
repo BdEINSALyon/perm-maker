@@ -4,6 +4,7 @@ import info.augendre.perm_maker.utils.Utils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
@@ -12,7 +13,8 @@ import java.util.*;
 /**
  * Created by gaugendre on 28/06/16
  */
-public class Task {
+public class Task implements Serializable {
+    private static final long serialVersionUID = -7058683052879161619L;
     private Map<DayOfWeek, ArrayList<Resource>> assignedResources;
     private String label;
     private Set<DayOfWeek> days;

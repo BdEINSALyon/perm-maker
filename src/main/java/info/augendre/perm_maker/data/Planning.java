@@ -1,5 +1,6 @@
 package info.augendre.perm_maker.data;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -7,7 +8,10 @@ import java.util.stream.Collectors;
 /**
  * Created by gaugendre on 28/06/16
  */
-public class Planning extends ArrayList<Task> {
+public class Planning extends ArrayList<Task> implements Serializable {
+
+    private static final long serialVersionUID = 6838374758027598445L;
+
     public Planning() {
         super();
     }
