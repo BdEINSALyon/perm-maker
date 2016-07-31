@@ -1,5 +1,6 @@
 package info.augendre.perm_maker.workers;
 
+import info.augendre.perm_maker.utils.SemanticVersion;
 import info.augendre.perm_maker.utils.Utils;
 import org.kohsuke.github.GHRelease;
 import org.kohsuke.github.GHRepository;
@@ -30,10 +31,11 @@ public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
                 if (!latest.isDraft() && !latest.isPrerelease()) {
                     String releaseTagName = latest.getTagName();
                     String currentVersion = projectBundle.getString("version");
-                    releaseTagName = Utils.normalizeVersionNumber(releaseTagName);
-                    currentVersion = Utils.normalizeVersionNumber(currentVersion);
 
-                    return !releaseTagName.equals(currentVersion);
+                    SemanticVersion localVersion = new SemanticVersion(currentVersion);
+                    SemanticVersion gitHubVersion = new SemanticVersion(releaseTagName);
+
+                    return gitHubVersion.compareTo(localVersion) > 0;
                 }
             }
         }

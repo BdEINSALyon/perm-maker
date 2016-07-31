@@ -26,11 +26,6 @@ public class Utils {
         return LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault()).toLocalDate();
     }
 
-    public static String normalizeVersionNumber(String versionNumber) {
-        if (versionNumber.startsWith("v")) versionNumber = versionNumber.substring(1);
-        return versionNumber;
-    }
-
     public static void makeUrlClickableEditorPane(JEditorPane editorPane) {
         editorPane.addHyperlinkListener(event -> {
             if (event.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
