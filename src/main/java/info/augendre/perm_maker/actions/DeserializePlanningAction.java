@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by gaugendre on 31/07/2016 13:37
  */
-public class DeserializePlanningAction extends AbstractDeserializeAction {
+public class DeserializePlanningAction extends AbstractDeserializeAction<Planning> {
     private static final long serialVersionUID = -1147713428016357223L;
 
     public DeserializePlanningAction(DefinePlanningDialog dialog) {
@@ -19,7 +19,7 @@ public class DeserializePlanningAction extends AbstractDeserializeAction {
     @Override
     public void update() throws ClassCastException {
         Object element = getDeserialized();
-        if (!(element instanceof Planning)) {
+        if (element == null) {
             throw new ClassCastException();
         }
 

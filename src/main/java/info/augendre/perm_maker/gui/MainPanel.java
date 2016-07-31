@@ -6,6 +6,7 @@ import com.intellij.uiDesigner.core.Spacer;
 import info.augendre.perm_maker.actions.DefinePlanningAction;
 import info.augendre.perm_maker.actions.DefineResourcesAction;
 import info.augendre.perm_maker.actions.DispatchTasksAction;
+import info.augendre.perm_maker.data.Availabilities;
 import info.augendre.perm_maker.data.Planning;
 import info.augendre.perm_maker.data.Resource;
 import info.augendre.perm_maker.data.Task;
@@ -28,11 +29,11 @@ public class MainPanel {
     private Planning planning;
     private DefaultTableModel permTableModel;
     private Vector<Object> permTableHeaders;
-    private ArrayList<Resource> resources;
+    private Availabilities resources;
 
     public MainPanel() {
         this.planning = new Planning();
-        this.resources = new ArrayList<>();
+        this.resources = new Availabilities();
         $$$setupUI$$$();
         availabilityButton.addActionListener(new DefineResourcesAction(this));
         planningButton.addActionListener(new DefinePlanningAction(this));

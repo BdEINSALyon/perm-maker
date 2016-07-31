@@ -3,12 +3,14 @@ package info.augendre.perm_maker.data;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 
 /**
  * Created by gaugendre on 28/06/16
  */
-public class Resource {
+public class Resource implements Serializable {
+    private static final long serialVersionUID = -4574717259557632640L;
     private String name;
     private Planning availability;
 
