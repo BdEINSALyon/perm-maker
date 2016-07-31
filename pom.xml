@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.repo>BdEINSALyon/perm-maker</project.repo>
+        <project.repo.url>https://github.com/BdEINSALyon/perm-maker</project.repo.url>
         <project.license>https://github.com/BdEINSALyon/perm-maker/blob/master/LICENSE</project.license>
     </properties>
 
