@@ -7,6 +7,7 @@ import info.augendre.perm_maker.actions.AddResourceAction;
 import info.augendre.perm_maker.actions.EditResourceAction;
 import info.augendre.perm_maker.data.Resource;
 import info.augendre.perm_maker.listeners.AllowEditListener;
+import info.augendre.perm_maker.listeners.ListDoubleClickListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,6 +55,7 @@ public class DefineResourcesDialog extends JDialog {
                 removeResource(resourcesList.getSelectedValuesList());
             }
         });
+        resourcesList.addMouseListener(new ListDoubleClickListener<>(resourcesList, this.mainPanel.getPlanning()));
     }
 
     private void refreshResourcesList() {

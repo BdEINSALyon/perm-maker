@@ -10,12 +10,11 @@ import info.augendre.perm_maker.actions.EditTaskAction;
 import info.augendre.perm_maker.data.Planning;
 import info.augendre.perm_maker.data.Task;
 import info.augendre.perm_maker.listeners.AllowEditListener;
+import info.augendre.perm_maker.listeners.ListDoubleClickListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ResourceBundle;
 
 public class DefinePlanningDialog extends JDialog {
@@ -61,6 +60,7 @@ public class DefinePlanningDialog extends JDialog {
         });
         defaultPlanningButton.addActionListener(new DefaultPlanningAction(this));
         createDoodleButton.addActionListener(new CreateDoodleAction(this, planning));
+        tasksList.addMouseListener(new ListDoubleClickListener<>(tasksList));
     }
 
     private void onOK() {

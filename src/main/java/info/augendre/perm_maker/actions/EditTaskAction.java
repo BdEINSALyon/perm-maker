@@ -21,13 +21,18 @@ public class EditTaskAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!definePlanningDialog.isSelectionEmpty()) {
-            List<Task> resources = definePlanningDialog.getSelectedTasks();
-            resources.stream().filter(task -> task != null).forEachOrdered(task -> {
-                TaskDialog dialog = new TaskDialog(task);
-                dialog.pack();
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            });
+            List<Task> tasks = definePlanningDialog.getSelectedTasks();
+            tasks
+                .stream()
+                .filter(task -> task != null)
+                .forEachOrdered(EditTaskAction::editTask);
         }
+    }
+
+    public static void editTask(Task task) {
+        TaskDialog dialog = new TaskDialog(task);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
     }
 }
