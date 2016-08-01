@@ -90,6 +90,7 @@
                 <configuration>
                     <show>private</show>
                     <nohelp>true</nohelp>
+                    <failOnError>false</failOnError>
                 </configuration>
             </plugin>
 
@@ -145,7 +146,7 @@
         </dependency>
     </dependencies>
 
-<!--    <reporting>
+    <reporting>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -153,10 +154,11 @@
                 <version>2.10.1</version>
                 <configuration>
                     <show>public</show>
+                    <failOnError>false</failOnError>
                 </configuration>
             </plugin>
         </plugins>
-    </reporting>-->
+    </reporting>
 
 
 </project>
