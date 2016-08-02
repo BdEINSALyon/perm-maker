@@ -1,10 +1,14 @@
 package info.augendre.perm_maker.utils;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runners.Parameterized;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -13,11 +17,20 @@ import static org.junit.Assert.assertEquals;
  * Created by gaugendre on 01/08/2016 16:22
  */
 public class UtilsTest {
+    private Calendar cal;
+    private Date date;
+
+    @Before
+    public void setUp() throws Exception {
+        date = new Date();
+        cal = Calendar.getInstance();
+        cal.setTime(date);
+    }
+
     @Test
     public void dateFromLocalTime() throws Exception {
         LocalTime localTime = LocalTime.now();
-        Date date = Utils.dateFromLocalTime(localTime);
-        Calendar cal = Calendar.getInstance();
+        date = Utils.dateFromLocalTime(localTime);
         cal.setTime(date);
 
         assertEquals(localTime.getHour(), cal.get(Calendar.HOUR_OF_DAY));
@@ -27,10 +40,7 @@ public class UtilsTest {
 
     @Test
     public void localDateFromDate() throws Exception {
-        Date date = new Date();
         LocalDate localDate = Utils.localDateFromDate(date);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
 
         assertEquals(localDate.getDayOfMonth(), cal.get(Calendar.DAY_OF_MONTH));
         assertEquals((localDate.getDayOfWeek().getValue() % 7) + 1, cal.get(Calendar.DAY_OF_WEEK));
@@ -41,10 +51,7 @@ public class UtilsTest {
 
     @Test
     public void localTimeFromDate() throws Exception {
-        Date date = new Date();
         LocalTime localTime = Utils.localTimeFromDate(date);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
 
         assertEquals(cal.get(Calendar.HOUR_OF_DAY), localTime.getHour());
         assertEquals(cal.get(Calendar.MINUTE), localTime.getMinute());
