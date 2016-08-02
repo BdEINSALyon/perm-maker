@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * This class aims to compare semantic version numbers.
- * Semantic version numbers are defined here : http://semver.org
+ * Semantic version numbers are defined here : <a href="http://semver.org">http://semver.org</a>
  */
 public class SemanticVersion implements Comparable<SemanticVersion> {
     /** The major version number. */
@@ -52,13 +52,13 @@ public class SemanticVersion implements Comparable<SemanticVersion> {
     /**
      * Constructs a {@link SemanticVersion} from a {@link String}.
      * @param version The version number.<p>
-     *                Must be in the following format : "X.Y.Z-PRE.W", where :
+     *                Must be in the following format : {@code "X.Y.Z-PRE.W"}, where :
      *                <ul>
-     *                    <li>X is the major version number</li>
-     *                    <li>Y is the minor version number</li>
-     *                    <li>Z is the patch version number</li>
-     *                    <li>PRE is the pre-release tag (see {@link PreRelease})</li>
-     *                    <li>W is the pre-release version number</li>
+     *                    <li>{@code X} is the major version number</li>
+     *                    <li>{@code Y} is the minor version number</li>
+     *                    <li>{@code Z} is the patch version number</li>
+     *                    <li>{@code PRE} is the pre-release tag (see {@link PreRelease})</li>
+     *                    <li>{@code W} is the pre-release version number</li>
      *                </ul>
      */
     public SemanticVersion(String version) {
@@ -181,14 +181,14 @@ public class SemanticVersion implements Comparable<SemanticVersion> {
     }
 
     /**
-     * Formats a version number to the following format : "X.Y.Z-PRE.W", where :<p>
-     *     <ul>
-     *         <li>X is the major version number</li>
-     *         <li>Y is the minor version number</li>
-     *         <li>Z is the patch version number</li>
-     *         <li>PRE is the pre-release tag (see {@link PreRelease})</li>
-     *         <li>W is the pre-release version number</li>
-     *     </ul>
+     * Formats a version number to the following format : {@code "X.Y.Z-PRE.W"}.<p>
+     * <ul>
+     *     <li>{@code X} is the major version number</li>
+     *     <li>{@code Y} is the minor version number</li>
+     *     <li>{@code Z} is the patch version number</li>
+     *     <li>{@code PRE} is the pre-release tag (see {@link PreRelease})</li>
+     *     <li>{@code W} is the pre-release version number</li>
+     * </ul>
      * @return The formatted version number.
      */
     @Override
