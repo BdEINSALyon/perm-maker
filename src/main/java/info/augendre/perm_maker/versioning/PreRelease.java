@@ -1,4 +1,4 @@
-package info.augendre.perm_maker.utils;
+package info.augendre.perm_maker.versioning;
 
 /**
  * Enumerates the pre-release tags available to use in {@link SemanticVersion}.

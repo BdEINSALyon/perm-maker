@@ -1,4 +1,4 @@
-package info.augendre.perm_maker.utils;
+package info.augendre.perm_maker.versioning;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

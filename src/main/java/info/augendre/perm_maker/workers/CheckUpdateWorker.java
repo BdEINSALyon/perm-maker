@@ -1,6 +1,6 @@
 package info.augendre.perm_maker.workers;
 
-import info.augendre.perm_maker.utils.SemanticVersion;
+import info.augendre.perm_maker.versioning.SemanticVersion;
 import info.augendre.perm_maker.utils.Utils;
 import org.kohsuke.github.GHRelease;
 import org.kohsuke.github.GHRepository;
