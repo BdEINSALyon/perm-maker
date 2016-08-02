@@ -22,19 +22,23 @@ public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
     @Override
     protected Boolean doInBackground() throws Exception {
         try {
+            // Connect to GitHub and fetch repo
             GitHub gitHub = GitHub.connectAnonymously();
             GHRepository repo = gitHub.getRepository(projectBundle.getString("repo"));
             PagedIterator<GHRelease> releases = repo.listReleases().iterator();
 
             if (releases.hasNext()) {
+                // Get the latest release
                 GHRelease latest = releases.next();
                 if (!latest.isDraft() && !latest.isPrerelease()) {
+                    // Get the release version and running version
                     String releaseTagName = latest.getTagName();
                     String currentVersion = projectBundle.getString("version");
 
                     SemanticVersion localVersion = new SemanticVersion(currentVersion);
                     SemanticVersion gitHubVersion = new SemanticVersion(releaseTagName);
 
+                    // We have an update if the release version is greater than the local version
                     return gitHubVersion.compareTo(localVersion) > 0;
                 }
             }
@@ -57,6 +61,7 @@ public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
         }
 
         if (updateAvailable) {
+            // Display a dialog if an update is available.
             JEditorPane editorPane = Utils.htmlEditorPaneFactory(
                 stringsBundle.getString("project-update_available") +
                 " <a href=\""+
