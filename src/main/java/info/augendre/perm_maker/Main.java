@@ -30,7 +30,6 @@ public class Main implements Runnable {
     }
 
     public static void main(String[] args) {
-
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
@@ -46,7 +45,7 @@ public class Main implements Runnable {
         // Add key binding
         mainPanel.getInputMap(AFC).put(escapeStroke, CLOSE);
         mainPanel.getActionMap().put(CLOSE, new QuitAction(mainFrame));
-
+        boolean couldSetMac = false;
         if (Utils.isMac()) {
             // Found at https://stackoverflow.com/a/11094687/2758732
             try {
@@ -55,6 +54,7 @@ public class Main implements Runnable {
                     .getMethod("getApplication")
                     .invoke(null);
 
+                // Get a proxy for AboutHandler
                 Object al = Proxy.newProxyInstance(
                     Class.forName("com.apple.eawt.AboutHandler").getClassLoader(), // 3) But construct it as a AboutHandler so we can use it below
                     new Class[]{Class.forName("com.apple.eawt.AboutHandler")}, // 1) Instead of calling some method from AboutHandler interface
@@ -65,12 +65,15 @@ public class Main implements Runnable {
                 app.getClass()
                     .getMethod("setAboutHandler", Class.forName("com.apple.eawt.AboutHandler"))
                     .invoke(app, al);
+
+                couldSetMac = true;
             }
             catch (Exception e) {
                 //fail quietly
             }
         }
-        else {
+        if (!Utils.isMac() || !couldSetMac) {
+            // If not on a mac or couldn't set the handlers for some reason
             JMenuBar menuBar = new JMenuBar();
             JMenu helpMenu = new JMenu(stringsBundle.getString("menu-help"));
             JMenuItem aboutThisApp = new JMenuItem(new AboutAction(mainFrame));
