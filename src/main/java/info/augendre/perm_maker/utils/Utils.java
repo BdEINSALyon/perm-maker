@@ -12,20 +12,46 @@ import java.util.Date;
  * Created by gaugendre on 29/06/16
  */
 public class Utils {
+    /**
+     * Converts a {@link Date} object into {@link LocalTime}.
+     * @param date The date to convert.
+     * @return A {@link LocalTime} containing the time info of the given {@code date}.
+     * @see #dateFromLocalTime(LocalTime)
+     * @see #localDateFromDate(Date)
+     */
     public static LocalTime localTimeFromDate(Date date) {
         Instant startInstant = Instant.ofEpochMilli(date.getTime());
         return LocalDateTime.ofInstant(startInstant, ZoneId.systemDefault()).toLocalTime();
     }
 
+    /**
+     * Converts a {@link LocalTime} object into {@link Date}.
+     * @param localTime The local time to convert.
+     * @return A {@link Date} containing the time info of the given {@code localTime}. The date is set to January 1st, 2000.
+     * @see #localDateFromDate(Date)
+     * @see #localTimeFromDate(Date)
+     */
     public static Date dateFromLocalTime(LocalTime localTime) {
         Instant instant = localTime.atDate(LocalDate.of(2000, 1, 1)).atZone(ZoneId.systemDefault()).toInstant();
         return Date.from(instant);
     }
 
+    /**
+     * Converts a {@link Date} object into {@link LocalDate}.
+     * @param date The date to convert.
+     * @return A {@link LocalTime} containing the date info of the given {@code date}.
+     * @see #dateFromLocalTime(LocalTime)
+     * @see #localTimeFromDate(Date)
+     */
     public static LocalDate localDateFromDate(Date date) {
         return LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault()).toLocalDate();
     }
 
+    /**
+     * Allow links contained in a {@link JEditorPane} to be opened in default system browser when clicked.
+     * Adds a {@link javax.swing.event.HyperlinkListener} to the given {@code editorPane}.
+     * @param editorPane The editor pane to modify.
+     */
     public static void makeUrlClickableEditorPane(JEditorPane editorPane) {
         editorPane.addHyperlinkListener(event -> {
             if (event.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
@@ -39,6 +65,13 @@ public class Utils {
         });
     }
 
+    /**
+     * Builds a {@link JEditorPane} given a HTML to display and a style to apply.
+     * @param html The HTML to display. Must not contain {@code <html>} nor {@code <body>} tags.
+     * @param style The style to apply. Must be formatted as CSS.
+     * @return The built {@link JEditorPane} with the given CSS and HTML.
+     * @see #htmlEditorPaneFactory(String)
+     */
     public static JEditorPane htmlEditorPaneFactory(String html, String style) {
         JLabel label = new JLabel();
         JEditorPane editorPane = new JEditorPane(
@@ -54,6 +87,12 @@ public class Utils {
         return editorPane;
     }
 
+    /**
+     * Builds a {@link JEditorPane} given a HTML to display. Will apply a default style.
+     * @param html The HTML to display. Must not contain {@code <html>} nor {@code <body>} tags.
+     * @return The built {@link JEditorPane} with the given CSS and HTML.
+     * @see #htmlEditorPaneFactory(String, String)
+     */
     public static JEditorPane htmlEditorPaneFactory(String html) {
         // for copying style
         JLabel label = new JLabel();
@@ -67,6 +106,10 @@ public class Utils {
         return htmlEditorPaneFactory(html, style);
     }
 
+    /**
+     * Checks if the app is running on a Mac system.
+     * @return true if running on a mac, false otherwise.
+     */
     public static boolean isMac() {
         return System.getProperty("os.name").contains("Mac");
     }
