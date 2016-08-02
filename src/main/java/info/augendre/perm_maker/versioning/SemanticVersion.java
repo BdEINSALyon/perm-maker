@@ -224,7 +224,7 @@ public class SemanticVersion implements Comparable<SemanticVersion> {
      * @param pr The {@link PreRelease} to convert to {@link String}.
      * @return The {@link String} representing the {@link PreRelease}.
      */
-    public String preReleaseToString(PreRelease pr) {
+    public static String preReleaseToString(PreRelease pr) {
         switch (pr) {
             case SNAPSHOT:
                 return "SNAPSHOT";
