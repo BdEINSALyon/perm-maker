@@ -12,7 +12,7 @@ public enum PreRelease implements Comparable<PreRelease> {
      * Doesn't care about case.<p>
      *
      * Requires string to fully spell the pre-release tag.<p>
-     * Example :
+     * Examples :
      * <blockquote><pre>
      *     PreRelease.fromString("alpha") returns PreRelease.ALPHA
      *     PreRelease.fromString("ALPHA") returns PreRelease.ALPHA

@@ -206,7 +206,7 @@ public class SemanticVersion implements Comparable<SemanticVersion> {
 
     /**
      * Removes the "v" that may be the first character of a version number. <p>
-     * Example :
+     * Examples :
      * <blockquote><pre>
      *     normalize("v1.0.4") returns "1.0.4"
      *     normalize("1.0.4") returns "1.0.4"
