@@ -1,11 +1,28 @@
 package info.augendre.perm_maker.utils;
 
 /**
- * Created by gaugendre on 01/08/2016 00:25
+ * Enumerates the pre-release tags available to use in {@link SemanticVersion}.
+ * @see SemanticVersion
  */
 public enum PreRelease implements Comparable<PreRelease> {
     SNAPSHOT, NIGHTLY, ALPHA, BETA, RC;
 
+    /**
+     * Builds a {@link PreRelease} given a {@link String}.
+     * Doesn't care about case.<p>
+     *
+     * Requires string to fully spell the pre-release tag.<p>
+     * Example :
+     * <blockquote><pre>
+     *     PreRelease.fromString("alpha") returns PreRelease.ALPHA
+     *     PreRelease.fromString("ALPHA") returns PreRelease.ALPHA
+     *     PreRelease.fromString("AlPha") returns PreRelease.ALPHA
+     *     PreRelease.fromString("a") returns null
+     * </pre></blockquote>
+     *
+     * @param s The string to convert.
+     * @return The built {@link PreRelease}. If no match is found, returns {@code null}.
+     */
     public static PreRelease fromString(String s) {
         if (s.equalsIgnoreCase("alpha")) {
             return PreRelease.ALPHA;
