@@ -33,7 +33,7 @@ public class Resource implements Serializable {
 
     @Override
     public String toString() {
-        return this.name + " : " + this.availability.getTasks().size() + " availabilities.";
+        return this.name + " : " + this.availability.size() + " availabilities.";
     }
 
     @Override
@@ -66,6 +66,6 @@ public class Resource implements Serializable {
     }
 
     public int getNumberOfAvailabilities() {
-        return this.availability.getTasks().size();
+        return this.availability.size();
     }
 }

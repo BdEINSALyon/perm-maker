@@ -69,7 +69,7 @@ public class ResourceDialog extends JDialog {
         }
 
         int i = 0;
-        for (Task t : resource.getAvailability().getTasks()) {
+        for (Task t : resource.getAvailability()) {
             selectedAvailabilities[i] = tasks.indexOf(t);
             i++;
         }
@@ -78,9 +78,9 @@ public class ResourceDialog extends JDialog {
 
     private void onOK() {
         resource.setName(nameField.getText());
-        resource.getAvailability().resetTasks();
+        resource.getAvailability().clear();
         for (Object o : availabilitiesList.getSelectedValuesList()) {
-            resource.getAvailability().addTask((Task) o);
+            resource.getAvailability().add((Task) o);
         }
         this.ok = true;
         dispose();

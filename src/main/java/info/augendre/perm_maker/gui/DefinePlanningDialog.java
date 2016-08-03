@@ -71,7 +71,7 @@ public class DefinePlanningDialog extends JDialog {
     }
 
     public void addTask(Task task) {
-        planning.addTask(task);
+        planning.add(task);
         refreshTaskList();
     }
 
@@ -84,17 +84,17 @@ public class DefinePlanningDialog extends JDialog {
     }
 
     public void refreshTaskList() {
-        tasksList.setListData(planning.getTasks().toArray(new Task[0]));
+        tasksList.setListData(planning.toArray(new Task[0]));
     }
 
     public void removeTask(Task task) {
-        planning.removeTask(task);
+        planning.remove(task);
         refreshTaskList();
     }
 
     public void removeTask(java.util.List<Task> tasksList) {
         for (Task t : tasksList) {
-            planning.removeTask(t);
+            planning.remove(t);
         }
         refreshTaskList();
     }

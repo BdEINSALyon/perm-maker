@@ -50,7 +50,7 @@ public class MainPanel {
 
     public void refreshPlanningDisplay() {
         Vector<Vector<Object>> data = new Vector<>();
-        for (Task t : planning.getTasks()) {
+        for (Task t : planning) {
             Map<DayOfWeek, Set<Resource>> displayedResources = new TreeMap<>();
             for (int i = 0; i < t.getNumberOfResources(); i++) {
                 Vector<Object> line = new Vector<>(permTable.getColumnCount());

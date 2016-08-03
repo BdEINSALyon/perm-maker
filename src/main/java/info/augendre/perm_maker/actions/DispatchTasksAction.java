@@ -27,7 +27,7 @@ public class DispatchTasksAction extends AbstractAction {
         Planning planning = this.mainPanel.getPlanning();
         planning.clearAssignments();
 
-        for (Task t : planning.getTasks()) {
+        for (Task t : planning) {
             for (DayOfWeek d : t.getDays()) {
                 ArrayList<Resource> allResources = new ArrayList<>(mainPanel.getResources());
                 ArrayList<Resource> notMuchAvailableResources = allResources.stream().filter(r -> r.getNumberOfAvailabilities() <= 4).collect(Collectors.toCollection(ArrayList::new));

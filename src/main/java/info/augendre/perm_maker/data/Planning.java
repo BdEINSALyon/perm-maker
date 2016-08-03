@@ -17,24 +17,12 @@ public class Planning extends ArrayList<Task> implements Serializable {
         super();
     }
 
-    @Deprecated
-    public ArrayList<Task> getTasks() {
-        return this;
+    public Planning(int initialCapacity) {
+        super(initialCapacity);
     }
 
-    @Deprecated
-    public void resetTasks() {
-        this.clear();
-    }
-
-    @Deprecated
-    public void addTask(Task task) {
-        this.add(task);
-    }
-
-    @Deprecated
-    public void removeTask(Task task) {
-        this.remove(task);
+    public Planning(Collection<? extends Task> c) {
+        super(c);
     }
 
     /**
