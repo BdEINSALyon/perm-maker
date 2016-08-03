@@ -25,7 +25,7 @@ public abstract class AbstractDeserializeAction<E extends Serializable> extends 
             FileDialog dialog;
             String mHomeDir = System.getProperty("user.home");
 
-            dialog = new FileDialog((Dialog) null, "Open", FileDialog.LOAD);
+            dialog = new FileDialog(this.dialog, "Open", FileDialog.LOAD);
             dialog.setDirectory(mHomeDir);
             dialog.setLocationRelativeTo(null);
             dialog.setModal(true);
