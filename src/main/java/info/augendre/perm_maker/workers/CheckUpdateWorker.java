@@ -13,7 +13,9 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by gaugendre on 29/07/2016 02:10
+ * This worker checks for available updates when the app starts.
+ * If an update is found, a dialog is shown to the user.
+ * @author gaugendre
  */
 public class CheckUpdateWorker extends SwingWorker<Boolean, Void> {
     private ResourceBundle projectBundle = ResourceBundle.getBundle("project");
