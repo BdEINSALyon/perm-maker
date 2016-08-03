@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by gaugendre on 31/07/2016 18:22
+ * Holds the resources and their availabilities.
+ * @see Resource
+ * @author gaugendre
  */
 public class Availabilities extends ArrayList<Resource> implements Serializable {
     private static final long serialVersionUID = 4036489651363728736L;
