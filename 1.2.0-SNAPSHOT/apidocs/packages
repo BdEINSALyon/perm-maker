@@ -4,4 +4,5 @@ info.augendre.perm_maker.gui
 info.augendre.perm_maker.listeners
 info.augendre.perm_maker
 info.augendre.perm_maker.utils
+info.augendre.perm_maker.versioning
 info.augendre.perm_maker.workers
