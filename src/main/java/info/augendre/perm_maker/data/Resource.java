@@ -11,9 +11,19 @@ import java.time.DayOfWeek;
  */
 public class Resource implements Serializable {
     private static final long serialVersionUID = -4574717259557632640L;
+    /**
+     * Resource's name
+     */
     private String name;
+
+    /**
+     * Resources availabilities.
+     */
     private Planning availability;
 
+    /**
+     * Constructs a default resource with no name (empty string) and an empty planning (not null).
+     */
     public Resource() {
         this.name = "";
         this.availability = new Planning();
@@ -56,6 +66,12 @@ public class Resource implements Serializable {
                 .toHashCode();
     }
 
+    /**
+     * Determines whether the resource is available at the given day for the given task (used for start and end time).
+     * @param task The task the resource should be available for.
+     * @param day The day the resource should be available.
+     * @return true if the resource is available, false otherwise.
+     */
     public boolean isAvailableAt(Task task, DayOfWeek day) {
         for (Task t : this.availability.getTasksForDay(day)) {
             if (task.getStartTime().compareTo(t.getStartTime()) <= 0 && task.getEndTime().compareTo(t.getEndTime()) >= 0) {
@@ -65,6 +81,10 @@ public class Resource implements Serializable {
         return false;
     }
 
+    /**
+     * Returns the number of availabilities of the resource.
+     * @return The number of availabilities of the resource.
+     */
     public int getNumberOfAvailabilities() {
         return this.availability.size();
     }
