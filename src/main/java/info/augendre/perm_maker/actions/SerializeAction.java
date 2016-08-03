@@ -1,5 +1,6 @@
 package info.augendre.perm_maker.actions;
 
+import info.augendre.perm_maker.data.Availabilities;
 import info.augendre.perm_maker.data.Planning;
 
 import javax.swing.*;
@@ -26,6 +27,9 @@ public class SerializeAction<E extends Serializable> extends AbstractAction {
             String fileName = "untitled.perm";
             if (element instanceof Planning) {
                 fileName = "planning.perm";
+            }
+            else if (element instanceof Availabilities) {
+                fileName = "resources.perm";
             }
 
             dialog = new FileDialog((Dialog) null, "Save", FileDialog.SAVE);
