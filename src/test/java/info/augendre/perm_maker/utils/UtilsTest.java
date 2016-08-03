@@ -2,13 +2,10 @@ package info.augendre.perm_maker.utils;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runners.Parameterized;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
