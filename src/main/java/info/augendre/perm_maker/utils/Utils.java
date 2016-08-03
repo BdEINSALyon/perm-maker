@@ -9,7 +9,8 @@ import java.time.*;
 import java.util.Date;
 
 /**
- * Created by gaugendre on 29/06/16
+ * Holds some utilities static methods.
+ * @author gaugendre
  */
 public class Utils {
     /**

@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 /**
  * This class aims to compare semantic version numbers.
  * Semantic version numbers are defined here : <a href="http://semver.org">http://semver.org</a>
+ * @author gaugendre
  */
 public class SemanticVersion implements Comparable<SemanticVersion> {
     /** The major version number. */

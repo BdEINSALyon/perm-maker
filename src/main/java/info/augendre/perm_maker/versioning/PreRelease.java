@@ -3,6 +3,7 @@ package info.augendre.perm_maker.versioning;
 /**
  * Enumerates the pre-release tags available to use in {@link SemanticVersion}.
  * @see SemanticVersion
+ * @author gaugendre
  */
 public enum PreRelease implements Comparable<PreRelease> {
     SNAPSHOT, NIGHTLY, ALPHA, BETA, RC;

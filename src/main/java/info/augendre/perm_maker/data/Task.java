@@ -11,7 +11,8 @@ import java.time.temporal.ChronoField;
 import java.util.*;
 
 /**
- * Created by gaugendre on 28/06/16
+ * A task is something a resource may be assigned to, in order to be completed.
+ * A task may repeat itself multiple times in a week.
  */
 public class Task implements Serializable {
     private static final long serialVersionUID = -7058683052879161619L;
@@ -170,7 +171,7 @@ public class Task implements Serializable {
 
     /**
      * Clears the assignments map.
-     * @see Map#clear() 
+     * @see Map#clear()
      */
     public void clearAssignments() {
         this.assignedResources.clear();

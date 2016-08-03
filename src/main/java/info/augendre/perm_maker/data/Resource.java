@@ -7,7 +7,8 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 
 /**
- * Created by gaugendre on 28/06/16
+ * A resource is generally a person. It has a name and a set of availabilities and can be assigned to {@link Task}.
+ * @author gaugendre
  */
 public class Resource implements Serializable {
     private static final long serialVersionUID = -4574717259557632640L;
