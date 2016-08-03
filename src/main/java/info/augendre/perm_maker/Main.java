@@ -13,7 +13,13 @@ import java.lang.reflect.Proxy;
 import java.util.ResourceBundle;
 
 /**
- * Created by Gabriel Augendre on 28/06/16
+ * Main class of the app.<br>
+ * Shows the first {@link JFrame} containing a {@link MainPanel}.<br>
+ * Starts a {@link CheckUpdateWorker}.<br>
+ * Tries to register OS X handlers for About if on a Mac.
+ *
+ * @author gaugendre
+ * @see MainPanel
  */
 public class Main implements Runnable {
     private JPanel mainPanel;
