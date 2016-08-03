@@ -6,7 +6,26 @@ package info.augendre.perm_maker.versioning;
  * @author gaugendre
  */
 public enum PreRelease implements Comparable<PreRelease> {
-    SNAPSHOT, NIGHTLY, ALPHA, BETA, RC;
+    /**
+     * Describes a snapshot version, usually a version built from a dev's computer.
+     */
+    SNAPSHOT,
+    /**
+     * Describes a version usually automatically built every night from a build server.
+     */
+    NIGHTLY,
+    /**
+     * Describes an alpha version, usually used for private testing inside the company.
+     */
+    ALPHA,
+    /**
+     * Describes a beta version, usually for public testing in the real world.
+     */
+    BETA,
+    /**
+     * Describes a release candidate version. A RC could be the real release but usually still needs few user feedback.
+     */
+    RC;
 
     /**
      * Builds a {@link PreRelease} given a {@link String}.
