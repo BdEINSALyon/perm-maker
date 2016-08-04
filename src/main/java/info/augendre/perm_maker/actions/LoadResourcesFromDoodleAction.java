@@ -59,7 +59,10 @@ public class LoadResourcesFromDoodleAction extends AbstractAction {
                 Workbook wb = new HSSFWorkbook(fs);
                 Sheet sheet = wb.getSheetAt(0);
 
+                // Will hold the link between a column number and the associated day of week.
+                // Useful when parsing the tasks.
                 Map<Integer, DayOfWeek> colDayMap = new HashMap<>();
+
                 List<CellRangeAddress> merged = sheet.getMergedRegions();
                 for (CellRangeAddress range : merged) {
                     int row = range.getFirstRow();
@@ -75,15 +78,17 @@ public class LoadResourcesFromDoodleAction extends AbstractAction {
                     }
                 }
 
-                List<Task> tasks = this.dialog.getMainPanel().getPlanning().getAvailabilitiesList();
+                // Will hold the link between a column number and the associated task.
                 Map<Integer, Task> colTaskMap = new HashMap<>();
 
                 boolean inHeader = true; // Are we in the header (before answers) ?
-                boolean metBCell = false;
-                boolean metDays = false;
-                boolean passedDays = false;
+                boolean metBCell = false; // Have we met a line where first cell is in B column ?
+                boolean metDays = false; // Have we met the days row ?
+                boolean passedDays = false; // Have we passed the days row ?
+
                 for (Row row : sheet) {
                     if (row != null) {
+                        // In the header, parse the hours and create tasks
                         if (inHeader) {
                             for (Cell cell : row) {
                                 if (cell != null) {
@@ -91,14 +96,17 @@ public class LoadResourcesFromDoodleAction extends AbstractAction {
                                         metBCell = true;
                                     }
                                     else if (cell.getAddress().getColumn() == 0 && metBCell) {
+                                        // We leave the header as soon as we get a first cell in A column.
                                         inHeader = false;
                                     }
                                     if (inHeader && metBCell) {
                                         if (!passedDays) {
                                             boolean isDay = Utils.dayOfWeekFromString(cell.toString()) != null;
                                             if (!metDays) metDays = isDay;
+                                            // We leave the days row as soon as we can't parse days anymore
                                             passedDays = metDays && !isDay;
                                         }
+                                        // We can only parse hours after days line
                                         if (passedDays) {
                                             String[] hours = cell.toString().split(" – ");
                                             String[] startHour = hours[0].split(":");
@@ -114,12 +122,14 @@ public class LoadResourcesFromDoodleAction extends AbstractAction {
                                                     Integer.parseInt(endHour[1])
                                                 );
                                             }
+                                            // Create a task from cell parsing
                                             Task parsedTask = new Task();
                                             parsedTask.setLabel("dispo");
                                             parsedTask.setNumberOfResources(0);
                                             parsedTask.addDay(colDayMap.get(cell.getAddress().getColumn()));
                                             parsedTask.setStartTime(startTime);
                                             parsedTask.setEndTime(endTime);
+
                                             colTaskMap.put(cell.getAddress().getColumn(), parsedTask);
                                         }
                                     }
@@ -127,6 +137,7 @@ public class LoadResourcesFromDoodleAction extends AbstractAction {
                             }
                         }
                         if (!inHeader) {
+                            // After leaving the header, parse the resources and their availabilities
                             Resource resource = new Resource();
                             for (Cell cell : row) {
                                 if (cell != null) {
