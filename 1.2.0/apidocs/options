@@ -1,0 +1,24 @@
+-classpath
+'/Users/gaugendre/.m2/repository/org/apache/poi/poi/3.14/poi-3.14.jar:/Users/gaugendre/.m2/repository/com/infradna/tool/bridge-method-annotation/1.14/bridge-method-annotation-1.14.jar:/Users/gaugendre/.m2/repository/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar:/Users/gaugendre/.m2/repository/commons-io/commons-io/1.4/commons-io-1.4.jar:/Users/gaugendre/.m2/repository/commons-codec/commons-codec/1.7/commons-codec-1.7.jar:/Users/gaugendre/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.2.3/jackson-databind-2.2.3.jar:/Users/gaugendre/.m2/repository/com/intellij/forms_rt/7.0.3/forms_rt-7.0.3.jar:/Users/gaugendre/.m2/repository/asm/asm-tree/3.0/asm-tree-3.0.jar:/Users/gaugendre/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.2.3/jackson-annotations-2.2.3.jar:/Users/gaugendre/.m2/repository/com/jgoodies/forms/1.1-preview/forms-1.1-preview.jar:/Users/gaugendre/.m2/repository/org/jenkins-ci/annotation-indexer/1.4/annotation-indexer-1.4.jar:/Users/gaugendre/.m2/repository/org/kohsuke/github-api/1.76/github-api-1.76.jar:/Users/gaugendre/.m2/repository/asm/asm-commons/3.0/asm-commons-3.0.jar:/Users/gaugendre/.m2/repository/jdom/jdom/1.0/jdom-1.0.jar:/Users/gaugendre/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/Users/gaugendre/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.2.3/jackson-core-2.2.3.jar:/Users/gaugendre/.m2/repository/asm/asm/3.0/asm-3.0.jar'
+-encoding
+'UTF-8'
+-public
+-sourcepath
+'/Users/gaugendre/Projects/java/perm-maker/src/main/java:/Users/gaugendre/Projects/java/perm-maker/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2016 <a href="http://bde.insa-lyon.org">BdE INSA Lyon</a>. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/gaugendre/Projects/java/perm-maker/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Perm Maker 1.2.0 API'
+-linkoffline
+'http://docs.oracle.com/javase/8/docs/api' '/Users/gaugendre/Projects/java/perm-maker/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'Perm Maker 1.2.0 API'
