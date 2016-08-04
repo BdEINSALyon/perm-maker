@@ -84,7 +84,6 @@ public class LoadResourcesFromDoodleAction extends AbstractAction {
                 boolean passedDays = false;
                 for (Row row : sheet) {
                     if (row != null) {
-                        System.out.println("====== New row " + inHeader + " ======");
                         if (inHeader) {
                             for (Cell cell : row) {
                                 if (cell != null) {
@@ -95,6 +94,11 @@ public class LoadResourcesFromDoodleAction extends AbstractAction {
                                         inHeader = false;
                                     }
                                     if (inHeader && metBCell) {
+                                        if (!passedDays) {
+                                            boolean isDay = Utils.dayOfWeekFromString(cell.toString()) != null;
+                                            if (!metDays) metDays = isDay;
+                                            passedDays = metDays && !isDay;
+                                        }
                                         if (passedDays) {
                                             String[] hours = cell.toString().split(" – ");
                                             String[] startHour = hours[0].split(":");
@@ -118,11 +122,6 @@ public class LoadResourcesFromDoodleAction extends AbstractAction {
                                             parsedTask.setEndTime(endTime);
                                             colTaskMap.put(cell.getAddress().getColumn(), parsedTask);
                                         }
-                                        else {
-                                            boolean isDay = Utils.dayOfWeekFromString(cell.toString()) != null;
-                                            if (!metDays) metDays = isDay;
-                                            passedDays = metDays && !isDay;
-                                        }
                                     }
                                 }
                             }
@@ -131,7 +130,6 @@ public class LoadResourcesFromDoodleAction extends AbstractAction {
                             Resource resource = new Resource();
                             for (Cell cell : row) {
                                 if (cell != null) {
-                                    System.out.println("cell : " + cell.getAddress() + " " + cell);
                                     if (cell.getAddress().getColumn() == 0) {
                                         resource.setName(cell.toString());
                                     }
