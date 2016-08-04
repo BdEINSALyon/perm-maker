@@ -114,4 +114,36 @@ public class Utils {
     public static boolean isMac() {
         return System.getProperty("os.name").contains("Mac");
     }
+
+    /**
+     * Returns the day of week from the given string.
+     * Only parses French.
+     * @param s The day of week, in French ("lundi", "mardi", ...).
+     * @return The {@link DayOfWeek} value.
+     */
+    public static DayOfWeek dayOfWeekFromString(String s) {
+        s = s.toLowerCase();
+        if (s.contains("lun")) {
+            return DayOfWeek.MONDAY;
+        }
+        else if (s.contains("mar")) {
+            return DayOfWeek.TUESDAY;
+        }
+        else if (s.contains("mer")) {
+            return DayOfWeek.WEDNESDAY;
+        }
+        else if (s.contains("jeu")) {
+            return DayOfWeek.THURSDAY;
+        }
+        else if (s.contains("ven")) {
+            return DayOfWeek.FRIDAY;
+        }
+        else if (s.contains("sam")) {
+            return DayOfWeek.SATURDAY;
+        }
+        else if (s.contains("dim")) {
+            return DayOfWeek.SUNDAY;
+        }
+        return null;
+    }
 }
