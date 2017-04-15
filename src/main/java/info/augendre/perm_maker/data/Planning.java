@@ -140,4 +140,26 @@ public class Planning extends ArrayList<Task> implements Serializable {
 
         return tasksList;
     }
+
+    public int getNumberOfResourcesNeeded() {
+        int sum = 0;
+        for (Task t: this) {
+            sum += t.getNumberOfResources() * t.getDays().size();
+        }
+
+        return sum;
+    }
+
+    public int getNumberOfMissingResources() {
+        int sum = 0;
+        for (Task t: this) {
+            int numberAssigned = 0;
+            for (List<Resource> resources: t.getAssignedResources().values()) {
+                numberAssigned += resources.size();
+            }
+            sum += t.getNumberOfResources() * t.getDays().size() - numberAssigned;
+        }
+
+        return sum;
+    }
 }

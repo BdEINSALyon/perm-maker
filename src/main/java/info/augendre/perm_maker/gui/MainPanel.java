@@ -2,7 +2,6 @@ package info.augendre.perm_maker.gui;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 import info.augendre.perm_maker.actions.DefinePlanningAction;
 import info.augendre.perm_maker.actions.DefineResourcesAction;
 import info.augendre.perm_maker.actions.DispatchTasksAction;
@@ -46,6 +45,10 @@ public class MainPanel {
 
     public Planning getPlanning() {
         return planning;
+    }
+
+    public void setPlanning(Planning planning) {
+        this.planning = planning;
     }
 
     public void refreshPlanningDisplay() {
